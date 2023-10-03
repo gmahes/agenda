@@ -17,4 +17,15 @@ class Auth extends CI_Controller
         var_dump($data);
         die;
     }
+    public function create()
+    {
+        $data = [
+            'username' => $this->input->post('username'),
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+        ];
+        $this->db->insert('user_details', $data);
+        redirect('auth/login');
+    }
 }
