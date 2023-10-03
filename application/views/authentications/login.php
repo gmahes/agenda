@@ -27,14 +27,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <h3 class="text-center text-light font-weight-light my-4">Login</h3>
                                 </div>
                                 <div class="card-body bg-dark bg-opacity-75">
-                                    <?= form_open('auth/verify'); ?>
+                                    <?= form_open('auth/login'); ?>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputUsername" type="text" placeholder="Username" name="username" />
                                         <label for="inputUsername">Username</label>
+                                        <?= form_error('username', '<small class="text-warning">', '</small>'); ?>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password" />
                                         <label for="inputPassword">Password</label>
+                                        <?= form_error('password', '<small class="text-warning">', '</small>'); ?>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
                                         <button type="submit" class="btn btn-success">Login</button>
