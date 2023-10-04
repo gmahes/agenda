@@ -25,6 +25,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header bg-dark bg-opacity-75">
                                     <h3 class="text-center text-light font-weight-light my-4">Login</h3>
+                                    <?= $this->session->flashdata('message'); ?>
                                 </div>
                                 <div class="card-body bg-dark bg-opacity-75">
                                     <?= form_open('auth/login'); ?>

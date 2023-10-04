@@ -24,8 +24,25 @@ class Auth extends CI_Controller
     {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-
         $user = $this->db->get_where('user_details', ['username' => $username])->row_array();
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                $data = [
+                    'username' => $user['username'],
+                    'role' => $user['role']
+                ];
+                $this->session->set_userdata($data);
+                redirect($user['role'] == 1 ? 'administrator' : 'member');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+                    Username / Password anda salah!</div>');
+                redirect('auth/login');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+                Username / Password anda salah!</div>');
+            redirect('auth/login');
+        }
     }
     public function create()
     {
@@ -36,5 +53,10 @@ class Auth extends CI_Controller
             'last_name'  => $this->input->post('last_name'),
         ];
         $this->db->insert('user_details', $data);
+    }
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('auth/login');
     }
 }
