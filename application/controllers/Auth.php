@@ -22,8 +22,8 @@ class Auth extends CI_Controller
     }
     private function verify()
     {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
+        $username = html_escape($this->input->post('username'));
+        $password = html_escape($this->input->post('password'));
         $user = $this->db->get_where('user_details', ['username' => $username])->row_array();
         if ($user) {
             if (password_verify($password, $user['password'])) {
