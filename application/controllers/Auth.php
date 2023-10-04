@@ -44,16 +44,6 @@ class Auth extends CI_Controller
             redirect('auth/login');
         }
     }
-    public function create()
-    {
-        $data = [
-            'username'   => $this->input->post('username'),
-            'password'   => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-            'first_name' => $this->input->post('first_name'),
-            'last_name'  => $this->input->post('last_name'),
-        ];
-        $this->db->insert('user_details', $data);
-    }
     public function logout()
     {
         $this->session->sess_destroy();
