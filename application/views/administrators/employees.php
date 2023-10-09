@@ -19,25 +19,25 @@
                                 <div class="row mb-3">
                                     <label for="inputUsername" class="col-sm-4 col-form-label">Username</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputUsername">
+                                        <input type="text" class="form-control" id="inputUsername" name="username">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputPassword3" class="col-sm-4 col-form-label">Password</label>
                                     <div class="col-sm-8">
-                                        <input type="password" class="form-control" id="inputPassword3">
+                                        <input type="password" class="form-control" id="inputPassword3" name="password">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputFirstname" class="col-sm-4 col-form-label">Nama Depan</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputFirstname">
+                                        <input type="text" class="form-control" id="inputFirstname" name="first_name">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputLastname" class="col-sm-4 col-form-label">Nama Belakang</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputLastname">
+                                        <input type="text" class="form-control" id="inputLastname" name="last_name">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -50,13 +50,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                <button type="submit" class="btn btn-primary float-end">Tambah</button>
                                 <?= form_close(); ?>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
                     </div>
                 </div>

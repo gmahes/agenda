@@ -40,8 +40,8 @@ class Administrator extends CI_Controller
     }
     public function create()
     {
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[agenda_db.username]|alpha_numeric');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[user_details.username]|alpha_numeric');
+        $this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">' . validation_errors() . '</div>');
             redirect('administrator/employees');
@@ -54,7 +54,7 @@ class Administrator extends CI_Controller
             'role'       => $this->input->post('role')
         ];
         $this->db->insert('user_details', $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Tambah karyawan baru berhasil!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah karyawan baru berhasil!</div>');
         redirect('administrator/employees');
     }
 }
