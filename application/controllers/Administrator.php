@@ -48,7 +48,7 @@ class Administrator extends CI_Controller
         }
         $data = [
             'username'   => $this->input->post('username'),
-            'password'   => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
             'first_name' => $this->input->post('first_name'),
             'last_name'  => $this->input->post('last_name'),
             'role'       => $this->input->post('role')
