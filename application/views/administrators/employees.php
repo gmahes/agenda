@@ -58,7 +58,7 @@
                 </div>
             </div>
             <?= $this->session->flashdata('message'); ?>
-            <div class="table-responsive">
+            <div class="table-responsive shadow-lg mt-2">
                 <?php $i = 1; ?>
                 <table class="table table-striped table-hover text-center">
                     <thead>
