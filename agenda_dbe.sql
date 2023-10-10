@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2023 at 11:16 AM
+-- Generation Time: Oct 10, 2023 at 03:08 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -41,7 +41,8 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`id`, `username`, `password`, `first_name`, `last_name`, `role`) VALUES
-(1, 'superadmin', '$2y$10$cU9TViCeASWF/THOWGXCDuolqTTY3QCefCFpB8TZLRExXPYHJ4yuK', 'super', 'admin', 1);
+(1, 'superadmin', '$2y$10$cU9TViCeASWF/THOWGXCDuolqTTY3QCefCFpB8TZLRExXPYHJ4yuK', 'super', 'admin', 1),
+(3, 'mahes', '$2y$10$f/YYK2R5sM5jOflWeQHGG.2UFivoe22wvSFa/aYVAV.7ZJp7o6fqa', 'Gregi Maulana', 'Mahes', 0);
 
 --
 -- Indexes for dumped tables
@@ -61,7 +62,7 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
