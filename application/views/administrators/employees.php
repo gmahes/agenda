@@ -4,7 +4,7 @@
             <!-- start content -->
             <h1 class="mt-2">Master Data Karyawan</h1>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah Karyawan Baru</button>
+            <button type="button" class="btn btn-primary btn-sm shadow" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah Karyawan Baru</button>
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -76,11 +76,8 @@
                                 <th scope="row"><?= $i++; ?></th>
                                 <td><?= $u['first_name']; ?></td>
                                 <td><?= $u['last_name']; ?></td>
-                                <td><?= $u['role']; ?></td>
-                                <td>
-                                    <button class="btn btn-warning btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
-                                </td>
+                                <td><?= $u['role'] == 1 ? 'Administrator' : 'Member'; ?></td>
+                                <td><button class="btn btn-danger btn-sm">Hapus</button></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
