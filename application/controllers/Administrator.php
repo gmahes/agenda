@@ -6,20 +6,20 @@ class Administrator extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata('username')) {
+        if (!$this->session->has_userdata('username')) {
             $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
                 Anda belum login!</div>');
             redirect('auth/login');
-        } elseif ($this->session->userdata('username')) {
-            if (!$this->session->userdata('role') == 1) {
-                echo "anda tidak bisa mengakses halaman ini";
-            }
+        } elseif ($this->session->has_userdata('username') && $this->session->userdata('role') == '0') {
+            echo "anda tidak bisa mengakses halaman ini";
+            die;
         }
     }
     public function index()
     {
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'user' => $this->db->get('user_details')
         ];
         $this->load->view('administrators/templates/header', $data);
         $this->load->view('administrators/templates/topbar');
@@ -29,13 +29,15 @@ class Administrator extends CI_Controller
     }
     public function employees()
     {
+        $all_user = $this->db->get('user_details')->result_array();
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'user' => $all_user
         ];
         $this->load->view('administrators/templates/header', $data);
         $this->load->view('administrators/templates/topbar');
         $this->load->view('administrators/templates/sidebar');
-        $this->load->view('administrators/employees');
+        $this->load->view('administrators/employees', $data);
         $this->load->view('administrators/templates/footer');
     }
     public function create()

@@ -2,7 +2,7 @@
     <main>
         <div class="container-fluid px-4">
             <!-- start content -->
-            <h1 class="mt-4">Master Data Karyawan</h1>
+            <h1 class="mt-2">Master Data Karyawan</h1>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah Karyawan Baru</button>
             <!-- Modal -->
@@ -59,25 +59,33 @@
             </div>
             <?= $this->session->flashdata('message'); ?>
             <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <?php $i = 1; ?>
+                <table class="table table-striped table-hover text-center">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Nomor</th>
+                            <th scope="col">Nama Depan</th>
+                            <th scope="col">Nama Belakang</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                        <?php foreach ($user as $u) : ?>
+                            <tr>
+                                <th scope="row"><?= $i++; ?></th>
+                                <td><?= $u['first_name']; ?></td>
+                                <td><?= $u['last_name']; ?></td>
+                                <td><?= $u['role']; ?></td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
-            <!-- end content -->
         </div>
     </main>
 </div>
