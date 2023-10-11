@@ -11,7 +11,7 @@ class Member extends CI_Controller
                 Anda belum login!</div>');
             redirect('auth/login');
         } elseif ($this->session->has_userdata('username') && $this->session->userdata('role') == '1') {
-            echo "anda tidak bisa mengakses halaman ini";
+            echo "Anda tidak memiliki hak akses terhadap halaman ini!";
             die;
         }
     }

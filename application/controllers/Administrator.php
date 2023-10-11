@@ -11,7 +11,7 @@ class Administrator extends CI_Controller
                 Anda belum login!</div>');
             redirect('auth/login');
         } elseif ($this->session->has_userdata('username') && $this->session->userdata('role') == '0') {
-            echo "anda tidak bisa mengakses halaman ini";
+            echo "Anda tidak memiliki hak akses terhadap halaman ini!";
             die;
         }
     }
@@ -57,6 +57,10 @@ class Administrator extends CI_Controller
         ];
         $this->db->insert('user_details', $data);
         $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah karyawan baru berhasil!</div>');
+        redirect('administrator/employees');
+    }
+    public function delete()
+    {
         redirect('administrator/employees');
     }
 }

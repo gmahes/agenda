@@ -58,7 +58,7 @@
                 </div>
             </div>
             <?= $this->session->flashdata('message'); ?>
-            <div class="table-responsive shadow-lg mt-2">
+            <div class="table-responsive shadow mt-2">
                 <?php $i = 1; ?>
                 <table class="table table-striped table-hover text-center">
                     <thead>
@@ -77,7 +77,13 @@
                                 <td><?= $u['first_name']; ?></td>
                                 <td><?= $u['last_name']; ?></td>
                                 <td><?= $u['role'] == 1 ? 'Administrator' : 'Member'; ?></td>
-                                <td><button class="btn btn-danger btn-sm">Hapus</button></td>
+                                <td>
+                                    <?= form_open('administrator/delete'); ?>
+                                    <?= form_hidden('id', $u['id']); ?>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')">Hapus Karyawan</button>
+                                    <?= form_close(); ?>
+                                </td>
+                                <!-- <td><a href="<?= base_url('administrator/delete/' . $u['id']); ?>" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')" class=" btn btn-danger btn-sm">Hapus</a></td> -->
                             </tr>
                         <?php endforeach ?>
                     </tbody>
