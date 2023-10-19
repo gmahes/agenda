@@ -23,4 +23,12 @@ class Welcome extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+	public function not_found()
+	{
+		$this->load->view('404');
+	}
+	public function not_authorized()
+	{
+		$this->load->view('401');
+	}
 }
