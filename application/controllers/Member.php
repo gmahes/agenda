@@ -17,7 +17,25 @@ class Member extends CI_Controller
     }
     public function index()
     {
-        echo "tampilan member";
-        var_dump($this->session->userdata('role'));
+        $data = [
+            'title' => 'Dashboard',
+            'user' => $this->db->get('user_details')
+        ];
+        $this->load->view('members/templates/header', $data);
+        $this->load->view('members/templates/topbar');
+        $this->load->view('members/templates/sidebar');
+        $this->load->view('members/index');
+        $this->load->view('members/templates/footer');
+    }
+    public function agenda()
+    {
+        $data = [
+            'title' => 'Dashboard',
+        ];
+        $this->load->view('members/templates/header', $data);
+        $this->load->view('members/templates/topbar');
+        $this->load->view('members/templates/sidebar');
+        $this->load->view('members/agenda');
+        $this->load->view('members/templates/footer');
     }
 }
