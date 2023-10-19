@@ -83,7 +83,6 @@
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')">Hapus Karyawan</button>
                                     <?= form_close(); ?>
                                 </td>
-                                <!-- <td><a href="<?= base_url('administrator/delete/' . $u['id']); ?>" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')" class=" btn btn-danger btn-sm">Hapus</a></td> -->
                             </tr>
                         <?php endforeach ?>
                     </tbody>

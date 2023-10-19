@@ -61,6 +61,11 @@ class Administrator extends CI_Controller
     }
     public function delete()
     {
+        if ($_POST) {
+            $id = $this->input->post('id');
+            $this->db->delete('user_details', ['id' => $id]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Hapus karyawan berhasil!</div>');
+        }
         redirect('administrator/employees');
     }
 }
