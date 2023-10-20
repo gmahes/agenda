@@ -68,4 +68,9 @@ class Administrator extends CI_Controller
         }
         redirect('administrator/employees');
     }
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('auth/login');
+    }
 }

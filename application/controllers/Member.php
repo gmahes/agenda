@@ -38,4 +38,9 @@ class Member extends CI_Controller
         $this->load->view('members/agenda');
         $this->load->view('members/templates/footer');
     }
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('auth/login');
+    }
 }
