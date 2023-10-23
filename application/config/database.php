@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'agenda_db',
+	'hostname' => 'sql.freedb.tech',
+	'username' => 'freedb_agenda_user',
+	'password' => 'gq!vFM7rPnky2R3',
+	'database' => 'freedb_agenda_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
