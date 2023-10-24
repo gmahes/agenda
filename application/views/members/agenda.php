@@ -3,82 +3,35 @@
         <div class="container-fluid px-4">
             <!-- start content -->
             <h1 class="mt-2">Tambah Agenda</h1>
-            <?= form_open('member/create'); ?>
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
-                    <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                    <table class="table">
-                        <thead>
+            <div class="table-responsive shadow mt-2">
+                <table class="table table-striped table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nomor Agenda</th>
+                            <th scope="col">Agenda</th>
+                            <th scope="col">Tanggal</th>
+                            <th scope="col">Waktu</th>
+                            <th scope="col">Tempat</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <?php foreach ($agenda as $a) : ?>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="row"><?= $a['agenda_number']; ?></th>
+                                <td><?= $a['agenda_program']; ?></td>
+                                <td><?= $a['agenda_date']; ?></td>
+                                <td><?= $a['agenda_time']; ?></td>
+                                <td><?= $a['agenda_place']; ?></td>
+                                <td>
+                                    <button class="fa-solid fa-pen-to-square" style="color: #ff7300;"></button>
+                                    <a href="<?= base_url('member'); ?>" onclick="return false" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>><i class="fa-solid fa-trash-can" style="color: #ff0000;"></i></a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitte</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
-                <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
             </div>
-            <?= form_close(); ?>
             <!-- end content -->
         </div>
     </main>

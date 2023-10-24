@@ -31,6 +31,7 @@ class Member extends CI_Controller
     {
         $data = [
             'title' => 'Dashboard',
+            'agenda' => $this->db->get('agenda_details')->result_array()
         ];
         $this->load->view('members/templates/header', $data);
         $this->load->view('members/templates/topbar');
