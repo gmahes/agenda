@@ -14,39 +14,36 @@
                         </div>
                         <div class="modal-body">
                             <div class="container">
-                                <?= form_open('administrator/create'); ?>
+                                <?= form_open('member/create'); ?>
+                                <?= form_hidden('AgendaTaskperson', $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name')); ?>
                                 <div class="row mb-3">
-                                    <label for="inputUsername" class="col-sm-4 col-form-label">Username</label>
+                                    <label for="inputAgendaNumber" class="col-sm-4 col-form-label">Nomor Agenda</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputUsername" name="username">
+                                        <input type="text" class="form-control" id="inputAgendaNumber" name="AgendaNumber">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputPassword3" class="col-sm-4 col-form-label">Password</label>
+                                    <label for="inputAgendaProgram" class="col-sm-4 col-form-label">Agenda</label>
                                     <div class="col-sm-8">
-                                        <input type="password" class="form-control" id="inputPassword3" name="password">
+                                        <input type="text" class="form-control" id="inputAgendaProgram" name="AgendaProgram">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputFirstname" class="col-sm-4 col-form-label">Nama Depan</label>
+                                    <label for="inputDate" class="col-sm-4 col-form-label">Tanggal</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputFirstname" name="first_name">
+                                        <input type="date" class="form-control" id="inputDate" name="Date">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputLastname" class="col-sm-4 col-form-label">Nama Belakang</label>
+                                    <label for="inputTime" class="col-sm-4 col-form-label">Waktu</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputLastname" name="last_name">
+                                        <input type="time" class="form-control" id="inputTime" name="Time">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputLastname" class="col-sm-4 col-form-label">Jabatan</label>
+                                    <label for="inputAgendaPlace" class="col-sm-4 col-form-label">Tempat</label>
                                     <div class="col-sm-8">
-                                        <select class="form-select" aria-label=".form-select-sm example" name="role">
-                                            <option selected>Silahkan pilih jabatan</option>
-                                            <option value="0">Member</option>
-                                            <option value="1">Administrator</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="inputAgendaPlace" name="AgendaPlace">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary float-end">Tambah</button>
@@ -65,7 +62,9 @@
                             <th scope="col">Tanggal</th>
                             <th scope="col">Waktu</th>
                             <th scope="col">Tempat</th>
+                            <th scope="col">Aksi</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -77,9 +76,11 @@
                                 <td><?= $a['agenda_time']; ?></td>
                                 <td><?= $a['agenda_place']; ?></td>
                                 <td>
-                                    <button class="fa-solid fa-pen-to-square" style="color: #ff7300;"></button>
-                                    <a href="<?= base_url('member'); ?>" onclick="return false" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>><i class="fa-solid fa-trash-can" style="color: #ff0000;"></i></a>
+                                    <a class="fa-solid fa-pen-to-square fa-lg" style="color: #ff7300;" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>></a>
+                                    <a href="<?= base_url('member'); ?>" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>><i class="fa-solid fa-trash-can fa-lg" style="color: #ff0000;"></i></a>
                                 </td>
+                                <td><?= $a['is_verified'] == 0 ? '<i class="fa-solid fa-hourglass-start fa-xl" style="color: #005eff;" title="Dalam Proses Verifikasi"></i>' : '<i class="fa-solid fa-square-check fa-xl" style="color: #026100;"title="Sudah Terverifikasi"></i>'; ?></td>
+                                <td></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
