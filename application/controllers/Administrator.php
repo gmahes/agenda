@@ -68,6 +68,19 @@ class Administrator extends CI_Controller
         }
         redirect('administrator/employees');
     }
+    public function agenda()
+    {
+        $all_agenda = $this->db->get('agenda_details')->result_array();
+        $data = [
+            'title' => 'Dashboard',
+            'agenda' => $all_agenda
+        ];
+        $this->load->view('administrators/templates/header', $data);
+        $this->load->view('administrators/templates/topbar');
+        $this->load->view('administrators/templates/sidebar');
+        $this->load->view('administrators/agenda', $data);
+        $this->load->view('administrators/templates/footer');
+    }
     public function logout()
     {
         $this->session->sess_destroy();

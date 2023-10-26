@@ -77,7 +77,7 @@
                                 <td><?= $a['agenda_place']; ?></td>
                                 <td>
                                     <a class="fa-solid fa-pen-to-square fa-lg" style="color: #ff7300;" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>></a>
-                                    <a href="<?= base_url('member'); ?>" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>><i class="fa-solid fa-trash-can fa-lg" style="color: #ff0000;"></i></a>
+                                    <a <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>><i class="fa-solid fa-trash-can fa-lg" style="color: #ff0000;"></i></a>
                                 </td>
                                 <td><?= $a['is_verified'] == 0 ? '<i class="fa-solid fa-hourglass-start fa-xl" style="color: #005eff;" title="Dalam Proses Verifikasi"></i>' : '<i class="fa-solid fa-square-check fa-xl" style="color: #026100;"title="Sudah Terverifikasi"></i>'; ?></td>
                                 <td></td>
