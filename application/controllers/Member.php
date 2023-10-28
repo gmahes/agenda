@@ -53,6 +53,15 @@ class Member extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah karyawan baru berhasil!</div>');
         redirect('member/agenda');
     }
+    public function delete()
+    {
+        if ($_POST) {
+            $id = $this->input->post('id');
+            $this->db->delete('agenda_details', ['id' => $id]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Hapus agenda berhasil!</div>');
+        }
+        redirect('member/agenda');
+    }
     public function logout()
     {
         $this->session->sess_destroy();
