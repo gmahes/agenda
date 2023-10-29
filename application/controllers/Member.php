@@ -31,7 +31,7 @@ class Member extends CI_Controller
     {
         $data = [
             'title' => 'Dashboard',
-            'agenda' => $this->db->get('agenda_details')->result_array(),
+            'agenda' => $this->db->get_where('agenda_details', ['agenda_taskperson' => $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name')])->result_array(),
             'count' => $this->db->query('SELECT AUTO_INCREMENT
             FROM information_schema.TABLES
             WHERE TABLE_SCHEMA = "freedb_agenda_db"

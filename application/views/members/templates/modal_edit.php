@@ -9,41 +9,40 @@
                 <div class="modal-body text-start">
                     <div class="container">
                         <?= form_open('member/edit'); ?>
-                        <?php foreach ($count as $c) : ?>
-                            <?= form_hidden('id', $ag['id']); ?>
-                            <?= form_hidden('AgendaNumber', $ag['agenda_number']); ?>
-                            <div class="row mb-3">
-                                <label for="inputAgendaNumber" class="col-sm-4 col-form-label">Nomor Agenda</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" disabled value="<?= $ag['agenda_number']; ?>">
-                                </div>
+                        <?= form_hidden('id', $ag['id']); ?>
+                        <?= form_hidden('AgendaTaskperson', $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name')); ?>
+                        <?= form_hidden('AgendaNumber', $ag['agenda_number']); ?>
+                        <div class="row mb-3">
+                            <label for="inputAgendaNumber" class="col-sm-4 col-form-label">Nomor Agenda</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled value="<?= $ag['agenda_number']; ?>">
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputAgendaProgram" class="col-sm-4 col-form-label">Agenda</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputAgendaProgram" name="AgendaProgram" value="<?= $ag['agenda_program']; ?>">
-                                </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputAgendaProgram" class="col-sm-4 col-form-label">Agenda</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputAgendaProgram" name="AgendaProgram" value="<?= $ag['agenda_program']; ?>">
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-4 col-form-label">Tanggal</label>
-                                <div class="col-sm-8">
-                                    <input type="date" class="form-control" id="inputDate" name="Date" value="<?= $ag['agenda_date']; ?>">
-                                </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputDate" class="col-sm-4 col-form-label">Tanggal</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="inputDate" name="Date" value="<?= $ag['agenda_date']; ?>">
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputTime" class="col-sm-4 col-form-label">Waktu</label>
-                                <div class="col-sm-8">
-                                    <input type="time" class="form-control" id="inputTime" name="Time" value="<?= $ag['agenda_time']; ?>">
-                                </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputTime" class="col-sm-4 col-form-label">Waktu</label>
+                            <div class="col-sm-8">
+                                <input type="time" class="form-control" id="inputTime" name="Time" value="<?= $ag['agenda_time']; ?>">
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputAgendaPlace" class="col-sm-4 col-form-label">Tempat</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputAgendaPlace" name="AgendaPlace" value="<?= $ag['agenda_place']; ?>">
-                                </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputAgendaPlace" class="col-sm-4 col-form-label">Tempat</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputAgendaPlace" name="AgendaPlace" value="<?= $ag['agenda_place']; ?>">
                             </div>
-                            <button type="submit" class="btn btn-primary float-end">Simpan</button>
-                        <?php endforeach ?>
+                        </div>
+                        <button type="submit" class="btn btn-primary float-end">Simpan</button>
                         <?= form_close(); ?>
                     </div>
                 </div>
