@@ -31,7 +31,11 @@ class Member extends CI_Controller
     {
         $data = [
             'title' => 'Dashboard',
-            'agenda' => $this->db->get('agenda_details')->result_array()
+            'agenda' => $this->db->get('agenda_details')->result_array(),
+            'count' => $this->db->query('SELECT AUTO_INCREMENT
+            FROM information_schema.TABLES
+            WHERE TABLE_SCHEMA = "freedb_agenda_db"
+            AND TABLE_NAME = "agenda_details"')->result_array()
         ];
         $this->load->view('members/templates/header', $data);
         $this->load->view('members/templates/topbar');
@@ -51,6 +55,21 @@ class Member extends CI_Controller
         ];
         $this->db->insert('agenda_details', $data);
         $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah karyawan baru berhasil!</div>');
+        redirect('member/agenda');
+    }
+    public function edit()
+    {
+        $data = [
+            'agenda_number'   => $this->input->post('AgendaNumber'),
+            'agenda_date'   => $this->input->post('Date'),
+            'agenda_time' => $this->input->post('Time'),
+            'agenda_place'  => $this->input->post('AgendaPlace'),
+            'agenda_program'       => $this->input->post('AgendaProgram'),
+            'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('agenda_details', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Edit agenda berhasil!</div>');
         redirect('member/agenda');
     }
     public function delete()

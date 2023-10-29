@@ -9,38 +9,40 @@
                 <div class="container">
                     <?= form_open('member/create'); ?>
                     <?= form_hidden('AgendaTaskperson', $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name')); ?>
-                    <?= form_hidden('AgendaNumber', date('Y') . date('m') . date('d')); ?>
-                    <div class="row mb-3">
-                        <label for="inputAgendaNumber" class="col-sm-4 col-form-label">Nomor Agenda</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" disabled value="<?= date('Y') . date('m') . date('d'); ?>">
+                    <?php foreach ($count as $c) : ?>
+                        <?= form_hidden('AgendaNumber', date('Y') . date('m') . date('d') . $c['AUTO_INCREMENT']); ?>
+                        <div class="row mb-3">
+                            <label for="inputAgendaNumber" class="col-sm-4 col-form-label">Nomor Agenda</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled value="<?= date('Y') . date('m') . date('d') . $c['AUTO_INCREMENT']; ?>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputAgendaProgram" class="col-sm-4 col-form-label">Agenda</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputAgendaProgram" name="AgendaProgram">
+                        <div class="row mb-3">
+                            <label for="inputAgendaProgram" class="col-sm-4 col-form-label">Agenda</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputAgendaProgram" name="AgendaProgram">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputDate" class="col-sm-4 col-form-label">Tanggal</label>
-                        <div class="col-sm-8">
-                            <input type="date" class="form-control" id="inputDate" name="Date">
+                        <div class="row mb-3">
+                            <label for="inputDate" class="col-sm-4 col-form-label">Tanggal</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="inputDate" name="Date">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputTime" class="col-sm-4 col-form-label">Waktu</label>
-                        <div class="col-sm-8">
-                            <input type="time" class="form-control" id="inputTime" name="Time">
+                        <div class="row mb-3">
+                            <label for="inputTime" class="col-sm-4 col-form-label">Waktu</label>
+                            <div class="col-sm-8">
+                                <input type="time" class="form-control" id="inputTime" name="Time">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputAgendaPlace" class="col-sm-4 col-form-label">Tempat</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputAgendaPlace" name="AgendaPlace">
+                        <div class="row mb-3">
+                            <label for="inputAgendaPlace" class="col-sm-4 col-form-label">Tempat</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputAgendaPlace" name="AgendaPlace">
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary float-end">Tambah</button>
+                        <button type="submit" class="btn btn-primary float-end">Tambah</button>
+                    <?php endforeach ?>
                     <?= form_close(); ?>
                 </div>
             </div>

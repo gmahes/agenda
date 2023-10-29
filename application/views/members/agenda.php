@@ -25,6 +25,7 @@
                     </thead>
                     <tbody class="table-group-divider">
                         <?php foreach ($agenda as $a) : ?>
+                            <?php $i = 1 ?>
                             <tr>
                                 <th scope="row"><?= $a['agenda_number']; ?></th>
                                 <td><?= $a['agenda_program']; ?></td>
@@ -32,13 +33,14 @@
                                 <td><?= $a['agenda_time']; ?></td>
                                 <td><?= $a['agenda_place']; ?></td>
                                 <td>
-                                    <a class="fa-solid fa-pen-to-square fa-lg" style="color: #ff7300;" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>></a>
+                                    <button type="button" class="btn btn-sm text-nowrap" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit<?= $a['id']; ?>"><i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;"></i></button>
+                                    <?php $this->load->view('members/templates/modal_edit'); ?>
                                     <?= form_open('member/delete', 'class="d-inline"'); ?>
                                     <?= form_hidden('id', $a['id']); ?>
-                                    <button type="submit" class="btn btn-sm text-nowrap" onclick="return confirm('Anda anda yakin akan menghapus data agenda ini?')" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>><i class="fa-lg fa-solid fa-trash-can" style="color: #a80000;"></i></button>
+                                    <button type="submit" class="btn btn-sm text-nowrap" onclick="return confirm('Anda anda yakin akan menghapus data agenda ini?')" <?= $a['is_verified'] == 1 ? 'hidden' : ''; ?>><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;"></i></button>
                                     <?= form_close(); ?>
                                 </td>
-                                <td><?= $a['is_verified'] == 0 ? '<i class="fa-solid fa-hourglass-start fa-xl" style="color: #005eff;" title="Dalam Proses Verifikasi"></i>' : '<i class="fa-solid fa-square-check fa-xl" style="color: #026100;"title="Sudah Terverifikasi"></i>'; ?></td>
+                                <td><?= $a['is_verified'] == 0 ? '<i class="mt-1 fa-solid fa-hourglass-start fa-xl" style="color: #005eff;" title="Dalam Proses Verifikasi"></i>' : '<i class="fa-solid fa-square-check fa-xl" style="color: #026100;"title="Sudah Terverifikasi"></i>'; ?></td>
                                 <td></td>
                             </tr>
                         <?php endforeach ?>
