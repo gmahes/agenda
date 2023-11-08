@@ -13,28 +13,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <title><?= $title; ?></title>
     <link href="<?= base_url(); ?>trash/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link href="<?= base_url(); ?>trash/DataTables/DataTables-1.13.6/css/dataTables.bootstrap5.css" rel="stylesheet">
-    <!-- <link href="<?= base_url(); ?>trash/DataTables/datatables.css" rel="stylesheet"> -->
-    <script src="<?= base_url(); ?>trash/DataTables/datatables.js"></script>
-    <link href="<?= base_url(); ?>trash/DataTables/Select-1.7.0/css/select.bootstrap5.css" rel="stylesheet">
-    <script src="<?= base_url(); ?>trash/DataTables/Select-1.7.0/js/dataTables.select.js"></script>
+    <link href="<?= base_url(); ?>trash/DataTables/DataTables-1.13.7/css/dataTables.bootstrap5.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>trash/DataTables/Responsive-2.5.0/css/responsive.bootstrap5.css" rel="stylesheet">
+    <script src="<?= base_url(); ?>trash/DataTables/jQuery-3.7.0/jquery-3.7.0.js"></script>
+    <script src="<?= base_url(); ?>trash/DataTables/DataTables-1.13.7/js/jquery.dataTables.js"></script>
+    <script src="<?= base_url(); ?>trash/DataTables/DataTables-1.13.7/js/dataTables.bootstrap5.js"></script>
+    <script src="<?= base_url(); ?>trash/DataTables/Responsive-2.5.0/js/dataTables.responsive.js"></script>
+    <script src="<?= base_url(); ?>trash/DataTables/Responsive-2.5.0/js/responsive.bootstrap5.js"></script>
     <script>
         $(document).ready(function() {
             $('#agenda').DataTable({
-                columnDefs: [{
-                    orderable: false,
-                    className: 'select-checkbox',
-                    targets: 0
-                }],
-                select: {
-                    style: 'multi',
-                    selector: 'td:first-child'
-                },
-                order: [
-                    [1, 'asc']
-                ],
+                responsive: false
             });
-
         });
     </script>
 </head>

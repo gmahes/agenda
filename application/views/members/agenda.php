@@ -22,7 +22,6 @@
                         <table id="agenda" class="table table-striped table-hover text-center">
                             <thead class="table-dark">
                                 <tr>
-                                    <th class=""></th>
                                     <th scope="col" class="text-center">Nomor Agenda</th>
                                     <th scope="col" class="text-center">Agenda</th>
                                     <th scope="col" class="text-center">Tanggal</th>
@@ -36,7 +35,6 @@
                             <tbody>
                                 <?php foreach ($agenda as $a) : ?>
                                     <tr>
-                                        <td></td>
                                         <th scope="row"><?= $a['agenda_number']; ?></th>
                                         <td><?= $a['agenda_program']; ?></td>
                                         <td><?= $a['agenda_date']; ?></td>
