@@ -27,7 +27,7 @@
                         <div class="row mb-3">
                             <label for="inputDate" class="col-sm-4 col-form-label">Tanggal</label>
                             <div class="col-sm-8">
-                                <input type="date" class="form-control" id="inputDate" name="Date" value="<?= $ag['agenda_date']; ?>">
+                                <input type="date" class="form-control" id="inputDate" name="Date" min="<?= date("Y-m-d"); ?>" value="<?= $ag['agenda_date']; ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
