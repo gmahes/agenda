@@ -70,7 +70,7 @@ class Administrator extends CI_Controller
     }
     public function agenda()
     {
-        $all_agenda = $this->db->get_where('agenda_details', ['is_verified' => 0])->result_array();
+        $all_agenda = $this->db->get_where('agenda_details', ['is_verified' => 'not_verified'])->result_array();
         $data = [
             'title' => 'Dashboard',
             'agenda' => $all_agenda
