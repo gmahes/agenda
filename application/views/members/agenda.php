@@ -40,7 +40,7 @@
                                         <td><?= $a['agenda_date']; ?></td>
                                         <td><?= $a['agenda_time']; ?></td>
                                         <td><?= $a['agenda_place']; ?></td>
-                                        <td class="">
+                                        <td>
                                             <div class="d-inline-flex">
                                                 <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit<?= $a['id']; ?>" title="Edit Agenda" <?= $a['is_verified'] == 'accepted'  ? 'hidden' : ($a['is_verified'] == 'declined' ? 'hidden' : ' '); ?>><i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;"></i></button>
                                                 <?php $this->load->view('members/templates/modal_edit'); ?>

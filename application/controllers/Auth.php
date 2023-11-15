@@ -38,7 +38,8 @@ class Auth extends CI_Controller
                     'username' => $user['username'],
                     'role' => $user['role'],
                     'first_name' => $user['first_name'],
-                    'last_name' => $user['last_name']
+                    'last_name' => $user['last_name'],
+                    'id' => $user['id']
                 ];
                 $this->session->set_userdata($data);
                 redirect($user['role'] == 1 ? 'administrator' : 'member');

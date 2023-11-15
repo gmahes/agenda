@@ -1,92 +1,61 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
+            <h1 class="mt-2">Selamat datang, <?= $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name'); ?></h1>
             <!-- start content -->
-            <h1 class="mt-2">Master Data Karyawan</h1>
+            <?= $this->session->flashdata('message'); ?>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm shadow" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah Karyawan Baru</button>
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Karyawan Baru</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <?= form_open('administrator/create'); ?>
-                                <div class="row mb-3">
-                                    <label for="inputUsername" class="col-sm-4 col-form-label">Username</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputUsername" name="username">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputPassword3" class="col-sm-4 col-form-label">Password</label>
-                                    <div class="col-sm-8">
-                                        <input type="password" class="form-control" id="inputPassword3" name="password">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputFirstname" class="col-sm-4 col-form-label">Nama Depan</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputFirstname" name="first_name">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputLastname" class="col-sm-4 col-form-label">Nama Belakang</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="inputLastname" name="last_name">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputLastname" class="col-sm-4 col-form-label">Jabatan</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-select" aria-label=".form-select-sm example" name="role">
-                                            <option selected>Silahkan pilih jabatan</option>
-                                            <option value="0">Member</option>
-                                            <option value="1">Administrator</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary float-end">Tambah</button>
-                                <?= form_close(); ?>
-                            </div>
-                        </div>
+            <div class="card mt-2 bg-secondary bg-opacity-10 border-dark shadow-lg">
+                <div class="card-header d-flex align-middle">
+                    <div class="col-sm-12 col-md-6 float-start">
+                        <h3 class="">Daftar Agenda</h3>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-end">
+                        <button type="button" class="btn btn-primary shadow mt-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah Karyawan Baru</button>
+                        <!-- Modal -->
+                        <?php $this->load->view('administrators/templates/modal_addemployee'); ?>
                     </div>
                 </div>
-            </div>
-            <?= $this->session->flashdata('message'); ?>
-            <div class="table-responsive shadow mt-2">
-                <?php $i = 1; ?>
-                <table class="table table-striped table-hover text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nomor</th>
-                            <th scope="col">Nama Depan</th>
-                            <th scope="col">Nama Belakang</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <?php foreach ($user as $u) : ?>
-                            <tr>
-                                <th scope="row"><?= $i++; ?></th>
-                                <td><?= $u['first_name']; ?></td>
-                                <td><?= $u['last_name']; ?></td>
-                                <td><?= $u['role'] == 1 ? 'Administrator' : 'Member'; ?></td>
-                                <td>
-                                    <?= form_open('administrator/delete'); ?>
-                                    <?= form_hidden('id', $u['id']); ?>
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')">Hapus Karyawan</button>
-                                    <?= form_close(); ?>
-                                </td>
-                            </tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <?php $i = 1; ?>
+                        <table id="employees" class="table table-striped table-hover text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col" class="text-center">Nomor</th>
+                                    <th scope="col" class="text-center">Nama Depan</th>
+                                    <th scope="col" class="text-center">Nama Belakang</th>
+                                    <th scope="col" class="text-center">Role</th>
+                                    <th scope="col" class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($user as $u) : ?>
+                                    <tr>
+                                        <th scope="row"><?= $i++; ?></th>
+                                        <td><?= $u['first_name']; ?></td>
+                                        <td><?= $u['last_name']; ?></td>
+                                        <td><?= $u['role'] == 1 ? 'Administrator' : 'Member'; ?></td>
+                                        <td>
+                                            <div class="d-inline-flex">
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit<?= $u['id']; ?>">
+                                                    <i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;"></i>
+                                                </button>
+                                                <!-- Modal -->
+                                                <?php $this->load->view('administrators/templates/modal_editemployee'); ?>
+                                                <?= form_open('administrator/delete'); ?>
+                                                <?= form_hidden('id', $u['id']); ?>
+                                                <button type="submit" class="btn btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;"></i></button>
+                                                <?= form_close(); ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

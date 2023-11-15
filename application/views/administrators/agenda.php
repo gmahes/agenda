@@ -19,6 +19,7 @@
                                     <th scope="col" class="text-center">Tanggal</th>
                                     <th scope="col" class="text-center">Waktu</th>
                                     <th scope="col" class="text-center">Tempat</th>
+                                    <th scope="col" class="text-center">Pembuat Agenda</th>
                                     <th scope="col" class="text-center">Aksi</th>
                                     <th scope="col" class="text-center">Status</th>
                                     <th scope="col" class="text-center">Keterangan</th>
@@ -32,6 +33,7 @@
                                         <td><?= $a['agenda_date']; ?></td>
                                         <td><?= $a['agenda_time']; ?></td>
                                         <td><?= $a['agenda_place']; ?></td>
+                                        <td><?= $a['agenda_taskperson']; ?></td>
                                         <td>
                                             <?= $a['is_verified'] == 0 ?
                                                 '<div class="dropdown-center">

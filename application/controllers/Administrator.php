@@ -19,7 +19,7 @@ class Administrator extends CI_Controller
     {
         $data = [
             'title' => 'Dashboard',
-            'user' => $this->db->get('user_details')
+            'user' => $this->db->get('user_details'),
         ];
         $this->load->view('administrators/templates/header', $data);
         $this->load->view('administrators/templates/topbar');
@@ -59,6 +59,24 @@ class Administrator extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah karyawan baru berhasil!</div>');
         redirect('administrator/employees');
     }
+    public function edit()
+    {
+        $data = [
+            'id'         => $this->input->post('id'),
+            'username'   => $this->input->post('username'),
+            'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'first_name' => $this->input->post('first_name'),
+            'last_name'  => $this->input->post('last_name'),
+            'role'       => $this->input->post('role')
+        ];
+        $data_agenda = [
+            'agenda_taskperson' => $this->input->post('first_name') . ' ' . $this->input->post('last_name')
+        ];
+        $this->db->where('id', $this->input->post('id'))->update('user_details', $data);
+        $this->db->where('user_id', $this->input->post('id'))->update('agenda_details', $data_agenda);
+        $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Edit karyawan berhasil!</div>');
+        redirect('administrator/employees');
+    }
     public function delete()
     {
         if ($_POST) {
@@ -73,7 +91,8 @@ class Administrator extends CI_Controller
         $all_agenda = $this->db->get_where('agenda_details', ['is_verified' => 'not_verified'])->result_array();
         $data = [
             'title' => 'Dashboard',
-            'agenda' => $all_agenda
+            'agenda' => $all_agenda,
+            'taskperson' => $this->db->select('first_name, last_name')->from('user_details')->join('agenda_details', 'user_details.id = agenda_details.agenda_taskperson')->get()->result_array()
         ];
         $this->load->view('administrators/templates/header', $data);
         $this->load->view('administrators/templates/topbar');
