@@ -13,7 +13,7 @@
                     <div class="col-sm-12 col-md-6 text-end">
                         <button type="button" class="btn btn-primary shadow mt-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah Karyawan Baru</button>
                         <!-- Modal -->
-                        <?php $this->load->view('administrators/templates/modal_addemployee'); ?>
+                        <?php $this->load->view('administrators/templates/addemployee'); ?>
                     </div>
                 </div>
                 <div class="card-body">
@@ -43,7 +43,7 @@
                                                     <i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;"></i>
                                                 </button>
                                                 <!-- Modal -->
-                                                <?php $this->load->view('administrators/templates/modal_editemployee'); ?>
+                                                <?php $this->load->view('administrators/templates/editemployee'); ?>
                                                 <?= form_open('administrator/delete'); ?>
                                                 <?= form_hidden('id', $u['id']); ?>
                                                 <button type="submit" class="btn btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;"></i></button>

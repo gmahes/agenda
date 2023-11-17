@@ -14,7 +14,7 @@
                     <div class="col-sm-12 col-md-6 float-end">
                         <button type="button" class="btn btn-primary shadow float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah Agenda Baru</button>
                         <!-- Modal -->
-                        <?php $this->load->view('members/templates/modal'); ?>
+                        <?php $this->load->view('members/templates/addagenda'); ?>
                     </div>
                 </div>
                 <div class="card-body">
@@ -43,14 +43,14 @@
                                         <td>
                                             <div class="d-inline-flex">
                                                 <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit<?= $a['id']; ?>" title="Edit Agenda" <?= $a['is_verified'] == 'accepted'  ? 'hidden' : ($a['is_verified'] == 'declined' ? 'hidden' : ' '); ?>><i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;"></i></button>
-                                                <?php $this->load->view('members/templates/modal_edit'); ?>
+                                                <?php $this->load->view('members/templates/editagenda'); ?>
                                                 <?= form_open('member/delete'); ?>
                                                 <?= form_hidden('id', $a['id']); ?>
                                                 <button type="submit" class="btn btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data agenda ini?')" <?= $a['is_verified'] == 'accepted'  ? 'hidden' : ($a['is_verified'] == 'declined' ? 'hidden' : ' '); ?> title="Hapus Agenda"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;"></i></button>
                                             </div>
                                             <?= form_close(); ?>
                                         </td>
-                                        <td><i class="fa-solid <?= $a['is_verified'] == 'not_verified' ? 'fa-hourglass-start ' : ($a['is_verified'] == 'accepted' ? 'fa-square-check ' : ($a['is_verified'] == 'declined' ? 'fa-ban ' : '')); ?>fa-xl mt-1" style="<?= $a['is_verified'] == 'not_verified' ? 'color: #005eff;' : ($a['is_verified'] == 'accepted' ? 'color: #026100;' : ($a['is_verified'] == 'declined' ? 'color: #ff0000;' : ' ')); ?>"></i></td>
+                                        <td><i class="fa-solid <?= $a['is_verified'] == 'not_verified' ? 'fa-hourglass-start ' : ($a['is_verified'] == 'accepted' ? 'fa-square-check ' : 'fa-ban'); ?>fa-xl mt-1" style="<?= $a['is_verified'] == 'not_verified' ? 'color: #005eff;' : ($a['is_verified'] == 'accepted' ? 'color: #026100;' : 'color: #ff0000;'); ?>" title="<?= $a['is_verified'] == 'not_verified' ? 'Dalam Proses Verifikasi' : ($a['is_verified'] == 'accepted' ? 'Disetujui' : 'Ditolak'); ?>"></i></td>
                                         <td></td>
                                     </tr>
                                 <?php endforeach ?>
