@@ -35,17 +35,21 @@
                                         <td><?= $a['agenda_place']; ?></td>
                                         <td><?= $a['agenda_taskperson']; ?></td>
                                         <td>
-                                            <?= $a['is_verified'] == 0 ?
-                                                '<div class="dropdown-center">
-                                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                          Pilih
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item text-success text-center" href="#">Setuju</a></li>
-                                        <li><a class="dropdown-item text-center text-danger" href="#">Tolak</a></li>
-                                        </ul>
-                                        </div>' :
-                                                ''; ?>
+                                            <div class="dropdown-center">
+                                                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Pilih Aksi
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <?= form_open('administrator/approve'); ?>
+                                                        <?= form_hidden('id', $a['id']); ?>
+                                                        <button type="submit" class="dropdown-item text-success text-center" onclick="return confirm('Anda anda yakin akan mennyetujui agenda ini?')">Setuju</button>
+                                                        <?= form_close(); ?>
+                                                    </li>
+                                                    <hr class="dropdown-divider">
+                                                    <li><button class="dropdown-item text-center text-danger" href="#">Tolak</button></li>
+                                                </ul>
+                                            </div>
                                         </td>
                                         <td><?= $a['is_verified'] == 0 ? '<i class="fa-solid fa-hourglass-start fa-xl" style="color: #005eff;" title="Menunggu Verifikasi"></i>' : '<i class="fa-solid fa-square-check fa-xl" style="color: #026100;"title="Sudah Terverifikasi"></i>'; ?></td>
                                         <td></td>

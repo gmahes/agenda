@@ -100,6 +100,15 @@ class Administrator extends CI_Controller
         $this->load->view('administrators/agenda', $data);
         $this->load->view('administrators/templates/footer');
     }
+    public function approve()
+    {
+        if ($_POST) {
+            $id = $this->input->post('id');
+            $this->db->where('id', $id)->update('agenda_details', ['is_verified' => 'accepted']);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Agenda berhasil diverifikasi!</div>');
+        }
+        redirect('administrator/agenda');
+    }
     public function logout()
     {
         $this->session->sess_destroy();
