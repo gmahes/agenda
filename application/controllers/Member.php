@@ -82,6 +82,30 @@ class Member extends CI_Controller
         }
         redirect('member/agenda');
     }
+    public function passwd()
+    {
+        $old = $this->input->post('OldPassword');
+        $new = $this->input->post('NewPassword');
+        $new1 = $this->input->post('NewPassword1');
+        $user = $this->db->get_where('user_details', ['id' => $this->session->userdata('id')])->row_array();
+        if (password_verify($old, $user['password'])) {
+            if ($new == $new1) {
+                $data = [
+                    'password' => password_hash($new, PASSWORD_DEFAULT)
+                ];
+                $this->db->where('id', $this->session->userdata('id'));
+                $this->db->update('user_details', $data);
+                $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Ganti password berhasil!</div>');
+                redirect('member');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Password baru tidak sama!</div>');
+                redirect('member');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Password lama salah!</div>');
+            redirect('member');
+        }
+    }
     public function logout()
     {
         $this->session->sess_destroy();

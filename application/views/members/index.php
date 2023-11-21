@@ -3,6 +3,7 @@
         <div class="container-fluid px-4">
             <!-- start content -->
             <h1 class="mt-2">Selamat datang, <?= $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name'); ?></h1>
+            <?= $this->session->flashdata('message'); ?>
             <hr>
             <?php foreach ($agenda as $a) : ?>
                 <div class="card text-bg-info bg-opacity-100 mb-3">

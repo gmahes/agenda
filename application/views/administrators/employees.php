@@ -40,13 +40,13 @@
                                             <div class="d-inline-flex">
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit<?= $u['id']; ?>">
-                                                    <i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;"></i>
+                                                    <i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;" title="Edit Data Karyawan"></i>
                                                 </button>
                                                 <!-- Modal -->
                                                 <?php $this->load->view('administrators/templates/editemployee'); ?>
                                                 <?= form_open('administrator/delete'); ?>
                                                 <?= form_hidden('id', $u['id']); ?>
-                                                <button type="submit" class="btn btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;"></i></button>
+                                                <button type="submit" class="btn btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;" title="Hapus Data Karyawan"></i></button>
                                                 <?= form_close(); ?>
                                             </div>
                                         </td>
