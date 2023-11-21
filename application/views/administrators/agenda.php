@@ -43,11 +43,16 @@
                                                     <li>
                                                         <?= form_open('administrator/approve'); ?>
                                                         <?= form_hidden('id', $a['id']); ?>
-                                                        <button type="submit" class="dropdown-item text-success text-center" onclick="return confirm('Anda anda yakin akan mennyetujui agenda ini?')">Setuju</button>
+                                                        <button type="submit" class="dropdown-item text-success text-center" onclick="return confirm('Anda anda yakin akan menyetujui agenda ini?')">Setuju</button>
                                                         <?= form_close(); ?>
                                                     </li>
                                                     <hr class="dropdown-divider">
-                                                    <li><button class="dropdown-item text-center text-danger" href="#">Tolak</button></li>
+                                                    <li>
+                                                        <?= form_open('administrator/reject'); ?>
+                                                        <?= form_hidden('id', $a['id']); ?>
+                                                        <button type="submit" class="dropdown-item text-center text-danger" onclick="return confirm('Anda anda yakin akan menyetujui agenda ini?')">Tolak</button>
+                                                        <?= form_close(); ?>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </td>

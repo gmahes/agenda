@@ -109,6 +109,15 @@ class Administrator extends CI_Controller
         }
         redirect('administrator/agenda');
     }
+    public function reject()
+    {
+        if ($_POST) {
+            $id = $this->input->post('id');
+            $this->db->where('id', $id)->update('agenda_details', ['is_verified' => 'declined']);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Agenda berhasil ditolak!</div>');
+        }
+        redirect('administrator/agenda');
+    }
     public function logout()
     {
         $this->session->sess_destroy();
