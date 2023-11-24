@@ -118,6 +118,27 @@ class Administrator extends CI_Controller
         }
         redirect('administrator/agenda');
     }
+    public function passwd()
+    {
+        $this->form_validation->set_rules('OldPassword', 'Old Password', 'required|trim');
+        $this->form_validation->set_rules('NewPassword', 'New Password', 'required|trim|matches[NewPassword1]');
+        $this->form_validation->set_rules('NewPassword1', 'Confirm New Password', 'required|trim|matches[NewPassword]');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">' . validation_errors() . '</div>');
+            redirect('administrator');
+        }
+        $user = $this->db->get_where('user_details', ['id' => $this->session->userdata('id')])->row_array();
+        $old_password = $this->input->post('OldPassword');
+        $new_password = $this->input->post('NewPassword');
+        if (!password_verify($old_password, $user['password'])) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Password lama salah!</div>');
+            redirect('administrator');
+        } else {
+            $this->db->where('id', $this->session->userdata('id'))->update('user_details', ['password' => password_hash($new_password, PASSWORD_DEFAULT)]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Password berhasil diganti!</div>');
+            redirect('administrator');
+        }
+    }
     public function logout()
     {
         $this->session->sess_destroy();

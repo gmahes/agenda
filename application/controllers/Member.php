@@ -84,26 +84,31 @@ class Member extends CI_Controller
     }
     public function passwd()
     {
-        $old = $this->input->post('OldPassword');
-        $new = $this->input->post('NewPassword');
-        $new1 = $this->input->post('NewPassword1');
-        $user = $this->db->get_where('user_details', ['id' => $this->session->userdata('id')])->row_array();
-        if (password_verify($old, $user['password'])) {
-            if ($new == $new1) {
+        $this->form_validation->set_rules('OldPassword', 'Old Password', 'required');
+        $this->form_validation->set_rules('NewPassword', 'New Password', 'required');
+        $this->form_validation->set_rules('NewPassword1', 'Confirm New Password', 'required|matches[NewPassword]');
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Mohon isi semua Field</div>');
+            redirect('member');
+        } else {
+            $old = $this->input->post('OldPassword');
+            $new = $this->input->post('NewPassword');
+            $new1 = $this->input->post('NewPassword1');
+            $user = $this->db->get_where('user_details', ['id' => $this->session->userdata('id')])->row_array();
+
+            if (password_verify($old, $user['password'])) {
                 $data = [
                     'password' => password_hash($new, PASSWORD_DEFAULT)
                 ];
                 $this->db->where('id', $this->session->userdata('id'));
                 $this->db->update('user_details', $data);
-                $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Ganti password berhasil!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Password Berhasil Diubah!</div>');
                 redirect('member');
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Password baru tidak sama!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Password Lama Salah!</div>');
                 redirect('member');
             }
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Password lama salah!</div>');
-            redirect('member');
         }
     }
     public function logout()
