@@ -44,9 +44,13 @@
                                                 </button>
                                                 <!-- Modal -->
                                                 <?php $this->load->view('administrators/templates/editemployee'); ?>
+                                                <?= form_open('administrator/reset'); ?>
+                                                <?= form_hidden('id', $u['id']); ?>
+                                                <button type="submit" class="btn btn-sm" onclick="return confirm('Anda yakin akan mereset password akun karyawan ini?')"><i class="fa-solid fa-user-lock fa-xl" style="color: #007016;" title="Reset Password Akun"></i></button>
+                                                <?= form_close(); ?>
                                                 <?= form_open('administrator/delete'); ?>
                                                 <?= form_hidden('id', $u['id']); ?>
-                                                <button type="submit" class="btn btn-sm" onclick="return confirm('Anda anda yakin akan menghapus data karyawan ini?')"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;" title="Hapus Data Karyawan"></i></button>
+                                                <button type="submit" class="btn btn-sm" onclick="return confirm('Anda yakin akan menghapus data karyawan ini?')"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;" title="Hapus Data Karyawan"></i></button>
                                                 <?= form_close(); ?>
                                             </div>
                                         </td>

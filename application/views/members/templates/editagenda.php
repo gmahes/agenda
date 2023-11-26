@@ -1,6 +1,6 @@
 <?php foreach ($agenda as $ag) : ?>
     <div class="modal fade" id="staticBackdropEdit<?= $ag['id']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Agenda</h1>
@@ -33,7 +33,7 @@
                         <div class="row mb-3">
                             <label for="inputTime" class="col-sm-4 col-form-label">Waktu</label>
                             <div class="col-sm-8">
-                                <input type="time" class="form-control" id="inputTime" name="Time" value="<?= $ag['agenda_time']; ?>">
+                                <input type="time" class="form-control" id="inputTime" name="Time" value="<?= $ag['agenda_start']; ?>">
                             </div>
                         </div>
                         <div class="row mb-3">

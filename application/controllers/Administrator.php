@@ -139,6 +139,15 @@ class Administrator extends CI_Controller
             redirect('administrator');
         }
     }
+    public function reset()
+    {
+        if ($_POST) {
+            $id = $this->input->post('id');
+            $this->db->where('id', $id)->update('user_details', ['password' => password_hash('12345678', PASSWORD_DEFAULT)]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Password berhasil direset!</div>');
+        }
+        redirect('administrator/employees');
+    }
     public function logout()
     {
         $this->session->sess_destroy();

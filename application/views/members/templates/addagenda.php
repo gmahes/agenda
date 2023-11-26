@@ -1,5 +1,5 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Agenda Baru</h1>
@@ -13,32 +13,36 @@
                     <?php foreach ($count as $c) : ?>
                         <?= form_hidden('AgendaNumber', date('Y') . date('m') . date('d') . $c['AUTO_INCREMENT']); ?>
                         <div class="row mb-3">
-                            <label for="inputAgendaNumber" class="col-sm-4 col-form-label">Nomor Agenda</label>
-                            <div class="col-sm-8">
+                            <label for="inputAgendaNumber" class="col-sm-3 col-form-label">Nomor Agenda</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" disabled value="<?= date('Y') . date('m') . date('d') . $c['AUTO_INCREMENT']; ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputAgendaProgram" class="col-sm-4 col-form-label">Agenda</label>
-                            <div class="col-sm-8">
+                            <label for="inputAgendaProgram" class="col-sm-3 col-form-label">Agenda</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" id="inputAgendaProgram" name="AgendaProgram">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputDate" class="col-sm-4 col-form-label">Tanggal</label>
-                            <div class="col-sm-8">
+                            <label for="inputDate" class="col-sm-3 col-form-label">Tanggal</label>
+                            <div class="col-sm-9">
                                 <input type="date" class="form-control" id="inputDate" name="Date" min="<?= date("Y-m-d"); ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputTime" class="col-sm-4 col-form-label">Waktu</label>
-                            <div class="col-sm-8">
+                            <label for="inputTime" class="col-sm-3 col-form-label">Waktu</label>
+                            <div class="col-sm-3">
                                 <input type="time" class="form-control" id="inputTime" name="Time">
+                            </div>
+                            <label for="inputTimee" class="col-sm-3 col-form-label text-center">s/d</label>
+                            <div class="col-sm-3">
+                                <input type="time" class="form-control" id="inputTimee" name="Time1">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputAgendaPlace" class="col-sm-4 col-form-label">Tempat</label>
-                            <div class="col-sm-8">
+                            <label for="inputAgendaPlace" class="col-sm-3 col-form-label">Tempat</label>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control" id="inputAgendaPlace" name="AgendaPlace">
                             </div>
                         </div>
