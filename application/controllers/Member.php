@@ -36,6 +36,7 @@ class Member extends CI_Controller
             FROM information_schema.TABLES
             WHERE TABLE_SCHEMA = "freedb_agenda_db"
             AND TABLE_NAME = "agenda_details"')->result_array(),
+            'dump' => $this->db->get('agenda_details')->result_array()
         ];
         $this->load->view('members/templates/header', $data);
         $this->load->view('members/templates/topbar');
@@ -56,21 +57,24 @@ class Member extends CI_Controller
         }
         if ($_POST) {
             if ($this->input->post('Date') == $this->db->get_where('agenda_details', ['agenda_date' => $this->input->post('Date')])->row_array()['agenda_date']) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda pada tanggal ' . $this->input->post('Date') . ' sudah ada!</div>');
-                redirect('member/agenda');
+                if ($this->input->post('Time') . ':00' == $this->db->get_where('agenda_details', ['agenda_start' => $this->input->post('Time1') . ':00'])->row_array()['agenda_start'] && $this->input->post('Time1') . ':00' == $this->db->get_where('agenda_details', ['agenda_start' => $this->input->post('Time1') . ':00'])->row_array()['agenda_end']) {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda yang anda buat bentrok dengan agenda lain!</div>');
+                    redirect('member/agenda');
+                } else {
+                    $data = [
+                        'user_id'  => $this->input->post('user_id'),
+                        'agenda_number'   => $this->input->post('AgendaNumber'),
+                        'agenda_date'   => $this->input->post('Date'),
+                        'agenda_start' => $this->input->post('Time') . ':00',
+                        'agenda_end' => $this->input->post('Time1') . ':00',
+                        'agenda_place'  => $this->input->post('AgendaPlace'),
+                        'agenda_program'       => $this->input->post('AgendaProgram'),
+                        'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
+                    ];
+                    $this->db->insert('agenda_details', $data);
+                    $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah agenda baru berhasil!</div>');
+                }
             }
-            $data = [
-                'user_id'  => $this->input->post('user_id'),
-                'agenda_number'   => $this->input->post('AgendaNumber'),
-                'agenda_date'   => $this->input->post('Date'),
-                'agenda_start' => $this->input->post('Time'),
-                'agenda_end' => $this->input->post('Time1'),
-                'agenda_place'  => $this->input->post('AgendaPlace'),
-                'agenda_program'       => $this->input->post('AgendaProgram'),
-                'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
-            ];
-            $this->db->insert('agenda_details', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah agenda baru berhasil!</div>');
         }
         redirect('member/agenda');
     }
