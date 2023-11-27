@@ -14,27 +14,29 @@
                         <table class="table table-striped table-hover text-center" id="agenda">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col" class="text-center">Nomor Agenda</th>
-                                    <th scope="col" class="text-center">Agenda</th>
-                                    <th scope="col" class="text-center">Tanggal</th>
-                                    <th scope="col" class="text-center">Waktu</th>
-                                    <th scope="col" class="text-center">Tempat</th>
-                                    <th scope="col" class="text-center">Pembuat Agenda</th>
-                                    <th scope="col" class="text-center">Aksi</th>
-                                    <th scope="col" class="text-center">Status</th>
-                                    <th scope="col" class="text-center">Keterangan</th>
+                                    <th scope="col" class="text-center align-middle">Nomor Agenda</th>
+                                    <th scope="col" class="text-center align-middle">Agenda</th>
+                                    <th scope="col" class="text-center align-middle">Tanggal</th>
+                                    <th scope="col" class="text-center align-middle">Waktu</th>
+                                    <th scope="col" class="text-center align-middle">Tempat</th>
+                                    <th scope="col" class="text-center align-middle">Pembuat Agenda</th>
+                                    <th scope="col" class="text-center align-middle">Aksi</th>
+                                    <th scope="col" class="text-center align-middle">Status</th>
+                                    <th scope="col" class="text-center align-middle">Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
                                 <?php foreach ($agenda as $a) : ?>
                                     <tr>
-                                        <th scope="row"><?= $a['agenda_number']; ?></th>
-                                        <td><?= $a['agenda_program']; ?></td>
-                                        <td><?= $a['agenda_date']; ?></td>
-                                        <td><?= $a['agenda_time']; ?></td>
-                                        <td><?= $a['agenda_place']; ?></td>
-                                        <td><?= $a['agenda_taskperson']; ?></td>
-                                        <td>
+                                        <th scope="row" class="align-middle"><?= $a['agenda_number']; ?></th>
+                                        <td class="align-middle"><?= $a['agenda_program']; ?></td>
+                                        <td class="align-middle"><?= date("d/m/Y", strtotime($a['agenda_date'])); ?></td>
+                                        <td class="align-middle">
+                                            <?= $a['agenda_start']; ?><p class="d-inline"> s/d </p><?= $a['agenda_end']; ?>
+                                        </td>
+                                        <td class="align-middle"><?= $a['agenda_place']; ?></td>
+                                        <td class="align-middle"><?= $a['agenda_taskperson']; ?></td>
+                                        <td class="align-middle">
                                             <div class="dropdown-center">
                                                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     Pilih Aksi
@@ -56,7 +58,7 @@
                                                 </ul>
                                             </div>
                                         </td>
-                                        <td><?= $a['is_verified'] == 0 ? '<i class="fa-solid fa-hourglass-start fa-xl" style="color: #005eff;" title="Menunggu Verifikasi"></i>' : '<i class="fa-solid fa-square-check fa-xl" style="color: #026100;"title="Sudah Terverifikasi"></i>'; ?></td>
+                                        <td class="align-middle"><?= $a['is_verified'] == 0 ? '<i class="fa-solid fa-hourglass-start fa-xl" style="color: #005eff;" title="Menunggu Verifikasi"></i>' : '<i class="fa-solid fa-square-check fa-xl" style="color: #026100;"title="Sudah Terverifikasi"></i>'; ?></td>
                                         <td></td>
                                     </tr>
                                 <?php endforeach ?>

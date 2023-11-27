@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="container">
+                <div class="container text-start">
                     <?= form_open('administrator/create'); ?>
                     <div class="row mb-3">
                         <label for="inputUsername" class="col-sm-4 col-form-label">Username</label>

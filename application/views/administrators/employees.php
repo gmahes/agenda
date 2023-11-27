@@ -38,20 +38,25 @@
                                         <td><?= $u['role'] == 1 ? 'Administrator' : 'Member'; ?></td>
                                         <td>
                                             <div class="d-inline-flex">
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit<?= $u['id']; ?>">
-                                                    <i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;" title="Edit Data Karyawan"></i>
-                                                </button>
-                                                <!-- Modal -->
-                                                <?php $this->load->view('administrators/templates/editemployee'); ?>
-                                                <?= form_open('administrator/reset'); ?>
-                                                <?= form_hidden('id', $u['id']); ?>
-                                                <button type="submit" class="btn btn-sm" onclick="return confirm('Anda yakin akan mereset password akun karyawan ini?')"><i class="fa-solid fa-user-lock fa-xl" style="color: #007016;" title="Reset Password Akun"></i></button>
-                                                <?= form_close(); ?>
-                                                <?= form_open('administrator/delete'); ?>
-                                                <?= form_hidden('id', $u['id']); ?>
-                                                <button type="submit" class="btn btn-sm" onclick="return confirm('Anda yakin akan menghapus data karyawan ini?')"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;" title="Hapus Data Karyawan"></i></button>
-                                                <?= form_close(); ?>
+                                                <div id="editemployee">
+                                                    <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit<?= $u['id']; ?>">
+                                                        <i class="fa-xl fa-solid fa-edit" style="color: #eb7d00;" title="Edit Data Karyawan"></i>
+                                                    </button>
+                                                    <!-- Modal -->
+                                                    <?php $this->load->view('administrators/templates/editemployee'); ?>
+                                                </div>
+                                                <div id="resetpassword">
+                                                    <?= form_open('administrator/reset'); ?>
+                                                    <?= form_hidden('id', $u['id']); ?>
+                                                    <button type="submit" class="btn btn-sm" onclick="return confirm('Anda yakin akan mereset password akun karyawan ini?')"><i class="fa-solid fa-user-lock fa-xl" style="color: #007016;" title="Reset Password Akun"></i></button>
+                                                    <?= form_close(); ?>
+                                                </div>
+                                                <div id="delete">
+                                                    <?= form_open('administrator/delete'); ?>
+                                                    <?= form_hidden('id', $u['id']); ?>
+                                                    <button type="submit" class="btn btn-sm" onclick="return confirm('Anda yakin akan menghapus data karyawan ini?')"><i class="fa-xl fa-solid fa-trash-can" style="color: #a80000;" title="Hapus Data Karyawan"></i></button>
+                                                    <?= form_close(); ?>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
