@@ -51,7 +51,7 @@ class Administrator extends CI_Controller
         $data = [
             'username'   => $this->input->post('username'),
             'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'first_name' => $this->input->post('first_name'),
+            'first_name' => $this->input->post('first_name') . '',
             'last_name'  => $this->input->post('last_name'),
             'role'       => $this->input->post('role')
         ];
@@ -70,7 +70,7 @@ class Administrator extends CI_Controller
             'role'       => $this->input->post('role')
         ];
         $data_agenda = [
-            'agenda_taskperson' => $this->input->post('first_name') . ' ' . $this->input->post('last_name')
+            'agenda_taskperson' => $this->input->post('first_name') . $this->input->post('last_name')
         ];
         $this->db->where('id', $this->input->post('id'))->update('user_details', $data);
         $this->db->where('user_id', $this->input->post('id'))->update('agenda_details', $data_agenda);

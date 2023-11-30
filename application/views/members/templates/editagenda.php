@@ -43,7 +43,12 @@
                         <div class="row mb-3">
                             <label for="inputAgendaPlace" class="col-sm-3 col-form-label">Tempat</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="inputAgendaPlace" name="AgendaPlace" value="<?= $ag['agenda_place']; ?>">
+                                <select class="form-select" aria-label="Default select example" name="AgendaPlace">
+                                    <option selected>Silahkan pilih...</option>
+                                    <option value="Ruang Rapat">Ruang Rapat</option>
+                                    <option value="Ruang Aula">Ruang Aula</option>
+                                    <option value="Ruang Direksi">Ruang Direksi</option>
+                                </select>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary float-end">Simpan</button>

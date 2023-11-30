@@ -36,7 +36,7 @@ class Member extends CI_Controller
             FROM information_schema.TABLES
             WHERE TABLE_SCHEMA = "freedb_agenda_db"
             AND TABLE_NAME = "agenda_details"')->result_array(),
-            'dump' => $this->db->get('agenda_details')->result_array()
+            'dump' => $this->db->get('agenda_details')->result_array(),
         ];
         $this->load->view('members/templates/header', $data);
         $this->load->view('members/templates/topbar');
@@ -49,32 +49,49 @@ class Member extends CI_Controller
         $this->form_validation->set_rules('Date', 'Date', 'required|trim');
         $this->form_validation->set_rules('Time', 'Time', 'required|trim');
         $this->form_validation->set_rules('Time1', 'Time1', 'required|trim');
-        $this->form_validation->set_rules('AgendaPlace', 'Agenda Place', 'required|trim');
+        $this->form_validation->set_rules('AgendaPlace', 'Agenda Place', 'required');
         $this->form_validation->set_rules('AgendaProgram', 'Agenda Program', 'required|trim');
         if ($this->form_validation->run() == false && $_POST) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">' . validation_errors() . '</div>');
             redirect('member/agenda');
         }
         if ($_POST) {
-            if ($this->input->post('Date') == $this->db->get_where('agenda_details', ['agenda_date' => $this->input->post('Date')])->row_array()['agenda_date']) {
-                if ($this->input->post('Time') . ':00' == $this->db->get_where('agenda_details', ['agenda_start' => $this->input->post('Time1') . ':00'])->row_array()['agenda_start'] && $this->input->post('Time1') . ':00' == $this->db->get_where('agenda_details', ['agenda_start' => $this->input->post('Time1') . ':00'])->row_array()['agenda_end']) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda yang anda buat bentrok dengan agenda lain!</div>');
-                    redirect('member/agenda');
-                } else {
-                    $data = [
-                        'user_id'  => $this->input->post('user_id'),
-                        'agenda_number'   => $this->input->post('AgendaNumber'),
-                        'agenda_date'   => $this->input->post('Date'),
-                        'agenda_start' => $this->input->post('Time') . ':00',
-                        'agenda_end' => $this->input->post('Time1') . ':00',
-                        'agenda_place'  => $this->input->post('AgendaPlace'),
-                        'agenda_program'       => $this->input->post('AgendaProgram'),
-                        'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
-                    ];
-                    $this->db->insert('agenda_details', $data);
-                    $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah agenda baru berhasil!</div>');
+            $agenda = $this->db->get('agenda_details')->result_array();
+            $data_post = [
+                'user_id'  => $this->input->post('user_id'),
+                'agenda_number'   => $this->input->post('AgendaNumber'),
+                'agenda_date'   => $this->input->post('Date'),
+                'agenda_start' => $this->input->post('Time'),
+                'agenda_end' => $this->input->post('Time1'),
+                'agenda_place'  => $this->input->post('AgendaPlace'),
+                'agenda_program'       => $this->input->post('AgendaProgram'),
+                'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
+            ];
+            foreach ($agenda as $a) {
+                if ($data_post['agenda_date'] == $a['agenda_date']) {
+                    if (strtotime($data_post['agenda_start']) >= strtotime($a['agenda_start']) or strtotime($data_post['agenda_end']) <= strtotime($a['agenda_end'])) {
+                        $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda yang anda buat bentrok dengan agenda lain! Silahkan cek agenda yang sudah terjadwal</div>');
+                        redirect('member/agenda');
+                    } elseif (strtotime($data_post['agenda_start']) < strtotime($a['agenda_start'])) {
+                        if (strtotime($data_post['agenda_end']) > strtotime($a['agenda_start'])) {
+                            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda yang anda buat bentrok dengan agenda lain! Silahkan cek agenda yang sudah terjadwal</div>');
+                            redirect('member/agenda');
+                        }
+                    }
                 }
             }
+            $data = [
+                'user_id'  => $this->input->post('user_id'),
+                'agenda_number'   => $this->input->post('AgendaNumber'),
+                'agenda_date'   => $this->input->post('Date'),
+                'agenda_start' => $this->input->post('Time'),
+                'agenda_end' => $this->input->post('Time1'),
+                'agenda_place'  => $this->input->post('AgendaPlace'),
+                'agenda_program'       => $this->input->post('AgendaProgram'),
+                'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
+            ];
+            $this->db->insert('agenda_details', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah agenda baru berhasil!</div>');
         }
         redirect('member/agenda');
     }
