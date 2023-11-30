@@ -32,7 +32,7 @@
                                         <td class="align-middle"><?= $a['agenda_program']; ?></td>
                                         <td class="align-middle"><?= date("d/m/Y", strtotime($a['agenda_date'])); ?></td>
                                         <td class="align-middle">
-                                            <?= $a['agenda_start']; ?><p class="d-inline"> s/d </p><?= $a['agenda_end']; ?>
+                                            <?= date('H:i', strtotime($a['agenda_start'])); ?><p class="d-inline"> s/d </p><?= date('H:i', strtotime($a['agenda_end'])); ?>
                                         </td>
                                         <td class="align-middle"><?= $a['agenda_place']; ?></td>
                                         <td class="align-middle"><?= $a['agenda_taskperson']; ?></td>
