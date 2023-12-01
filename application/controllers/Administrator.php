@@ -44,37 +44,51 @@ class Administrator extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[user_details.username]|alpha_numeric');
         $this->form_validation->set_rules('password', 'Password', 'required');
-        if ($this->form_validation->run() == false) {
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim');
+        $this->form_validation->set_rules('role', 'Role', 'required');
+        if ($this->form_validation->run() == false && $_POST) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">' . validation_errors() . '</div>');
             redirect('administrator/employees');
         }
-        $data = [
-            'username'   => $this->input->post('username'),
-            'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'first_name' => $this->input->post('first_name') . ' ',
-            'last_name'  => $this->input->post('last_name'),
-            'role'       => $this->input->post('role')
-        ];
-        $this->db->insert('user_details', $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah karyawan baru berhasil!</div>');
+        if ($_POST) {
+            $data = [
+                'username'   => $this->input->post('username'),
+                'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'first_name' => $this->input->post('first_name') . ' ',
+                'last_name'  => $this->input->post('last_name'),
+                'role'       => $this->input->post('role')
+            ];
+            $this->db->insert('user_details', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah karyawan baru berhasil!</div>');
+        }
         redirect('administrator/employees');
     }
     public function edit()
     {
-        $data = [
-            'id'         => $this->input->post('id'),
-            'username'   => $this->input->post('username'),
-            'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'first_name' => $this->input->post('first_name') . ' ',
-            'last_name'  => $this->input->post('last_name'),
-            'role'       => $this->input->post('role')
-        ];
-        $data_agenda = [
-            'agenda_taskperson' => $this->input->post('first_name') . $this->input->post('last_name')
-        ];
-        $this->db->where('id', $this->input->post('id'))->update('user_details', $data);
-        $this->db->where('user_id', $this->input->post('id'))->update('agenda_details', $data_agenda);
-        $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Edit karyawan berhasil!</div>');
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim');
+        $this->form_validation->set_rules('role', 'Role', 'required');
+        if ($this->form_validation->run() == false and $_POST) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">' . validation_errors() . '</div>');
+            redirect('administrator/employees');
+        }
+        if ($_POST) {
+            $data = [
+                'id'         => $this->input->post('id'),
+                'username'   => $this->input->post('username'),
+                'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'first_name' => $this->input->post('first_name') . ' ',
+                'last_name'  => $this->input->post('last_name'),
+                'role'       => $this->input->post('role')
+            ];
+            $data_agenda = [
+                'agenda_taskperson' => $this->input->post('first_name') . $this->input->post('last_name')
+            ];
+            $this->db->where('id', $this->input->post('id'))->update('user_details', $data);
+            $this->db->where('user_id', $this->input->post('id'))->update('agenda_details', $data_agenda);
+            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Edit karyawan berhasil!</div>');
+        }
         redirect('administrator/employees');
     }
     public function delete()
@@ -123,21 +137,23 @@ class Administrator extends CI_Controller
         $this->form_validation->set_rules('OldPassword', 'Old Password', 'required|trim');
         $this->form_validation->set_rules('NewPassword', 'New Password', 'required|trim|matches[NewPassword1]');
         $this->form_validation->set_rules('NewPassword1', 'Confirm New Password', 'required|trim|matches[NewPassword]');
-        if ($this->form_validation->run() == false) {
+        if ($this->form_validation->run() == false && $_POST) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">' . validation_errors() . '</div>');
             redirect('administrator');
         }
-        $user = $this->db->get_where('user_details', ['id' => $this->session->userdata('id')])->row_array();
-        $old_password = $this->input->post('OldPassword');
-        $new_password = $this->input->post('NewPassword');
-        if (!password_verify($old_password, $user['password'])) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Password lama salah!</div>');
-            redirect('administrator');
-        } else {
-            $this->db->where('id', $this->session->userdata('id'))->update('user_details', ['password' => password_hash($new_password, PASSWORD_DEFAULT)]);
-            $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Password berhasil diganti!</div>');
-            redirect('administrator');
+        if ($_POST) {
+            $user = $this->db->get_where('user_details', ['id' => $this->session->userdata('id')])->row_array();
+            $old_password = $this->input->post('OldPassword');
+            $new_password = $this->input->post('NewPassword');
+            if (!password_verify($old_password, $user['password'])) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Password lama salah!</div>');
+                redirect('administrator');
+            } else {
+                $this->db->where('id', $this->session->userdata('id'))->update('user_details', ['password' => password_hash($new_password, PASSWORD_DEFAULT)]);
+                $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Password berhasil diganti!</div>');
+            }
         }
+        redirect('administrator');
     }
     public function reset()
     {

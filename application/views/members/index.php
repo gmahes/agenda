@@ -11,9 +11,9 @@
                         <div class="card-header">
                             <h5 class="card-title text-center">Total Pengajuan Agenda</h5>
                         </div>
-                        <div class="card-body d-inline-flex mx-auto">
-                            <h3 class="card-text">2</h3>
-                            <h5 class="mt-2"> &nbsp; Agenda</h5>
+                        <div class="card-body mx-auto text-center">
+                            <h1 class="card-text"><?= $agenda_count; ?></h1>
+                            <h6 class="">AGENDA</h6>
                         </div>
                     </div>
                 </div>
@@ -22,9 +22,9 @@
                         <div class="card-header">
                             <h5 class="card-title text-center">Total Agenda Di Approve</h5>
                         </div>
-                        <div class="card-body d-inline-flex mx-auto">
-                            <h3 class="card-text">2</h3>
-                            <h5 class="mt-2"> &nbsp; Agenda</h5>
+                        <div class="card-body mx-auto text-center">
+                            <h1 class="card-text"><?= $agenda_approve; ?></h1>
+                            <h6 class="">AGENDA</h6>
                         </div>
                     </div>
                 </div>
@@ -33,9 +33,9 @@
                         <div class="card-header">
                             <h5 class="card-title text-center">Total Agenda Terjadwal</h5>
                         </div>
-                        <div class="card-body d-inline-flex mx-auto">
-                            <h3 class="card-text">2</h3>
-                            <h5 class="mt-2"> &nbsp; Agenda</h5>
+                        <div class="card-body mx-auto text-center">
+                            <h1 class="card-text"><?= $agenda_total; ?></h1>
+                            <h6 class="mt-2">AGENDA</h6>
                         </div>
                     </div>
                 </div>
