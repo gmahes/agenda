@@ -6,7 +6,7 @@
             <div class="card mt-2 bg-secondary bg-opacity-10 border-dark shadow-lg">
                 <div class="card-header d-flex align-middle">
                     <div class="col-sm-12 col-md-6 float-start">
-                        <h3 class="">Daftar Agenda</h3>
+                        <h3 class="">Daftar Pengajuan Agenda</h3>
                     </div>
                 </div>
                 <div class="card-body">

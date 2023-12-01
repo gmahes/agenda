@@ -8,7 +8,7 @@
             <div class="card mt-2 bg-secondary bg-opacity-10 border-dark shadow-lg">
                 <div class="card-header d-flex align-middle">
                     <div class="col-sm-12 col-md-6 float-start">
-                        <h3 class="">Daftar Agenda</h3>
+                        <h3 class="">Daftar Karyawan</h3>
                     </div>
                     <div class="col-sm-12 col-md-6 text-end">
                         <button type="button" class="btn btn-primary shadow mt-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tambah Karyawan Baru</button>
