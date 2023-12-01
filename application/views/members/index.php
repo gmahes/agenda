@@ -13,7 +13,7 @@
                         </div>
                         <div class="card-body mx-auto text-center">
                             <h1 class="card-text"><?= $agenda_count; ?></h1>
-                            <h6 class="">AGENDA</h6>
+                            <h6 class="card-text">AGENDA</h6>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="card-body mx-auto text-center">
                             <h1 class="card-text"><?= $agenda_approve; ?></h1>
-                            <h6 class="">AGENDA</h6>
+                            <h6 class="card-text">AGENDA</h6>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="card-body mx-auto text-center">
                             <h1 class="card-text"><?= $agenda_total; ?></h1>
-                            <h6 class="mt-2">AGENDA</h6>
+                            <h6 class="card-text">AGENDA</h6>
                         </div>
                     </div>
                 </div>

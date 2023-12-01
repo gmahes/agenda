@@ -20,6 +20,10 @@ class Administrator extends CI_Controller
         $data = [
             'title' => 'Dashboard',
             'user' => $this->db->get('user_details'),
+            'agenda' => $this->db->get_where('agenda_details', ['is_verified' => 'accepted'])->result_array(),
+            'agenda_count' => $this->db->get_where('agenda_details', ['is_verified' => 'not_verified'])->num_rows(),
+            'agenda_approve' => $this->db->get_where('agenda_details', ['is_verified' => 'accepted'])->num_rows(),
+            'agenda_declined' => $this->db->get_where('agenda_details', ['is_verified' => 'declined'])->num_rows(),
         ];
         $this->load->view('administrators/templates/header', $data);
         $this->load->view('administrators/templates/topbar');
