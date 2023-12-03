@@ -9,7 +9,7 @@ class Member extends CI_Controller
         if (!$this->session->has_userdata('username')) {
             $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
                 Anda belum login!</div>');
-            redirect('auth/login');
+            redirect('auth');
         } elseif ($this->session->has_userdata('username') && $this->session->userdata('role') == '1') {
             redirect('welcome/not_authorized');
             die;
@@ -21,8 +21,9 @@ class Member extends CI_Controller
             'title' => 'Dashboard',
             'agenda' => $this->db->get('agenda_details')->result_array(),
             'agenda_count' => $this->db->get_where('agenda_details', ['user_id' => $this->session->userdata('id')])->num_rows(),
-            'agenda_approve' => $this->db->get_where('agenda_details', ['user_id' => $this->session->userdata('id'), 'is_verified' => 'approved'])->num_rows(),
-            'agenda_total' => $this->db->get_where('agenda_details', ['is_verified' => 'approved'])->num_rows(),
+            'agenda_approve' => $this->db->get_where('agenda_details', ['user_id' => $this->session->userdata('id'), 'is_verified' => 'accepted'])->num_rows(),
+            'agenda_reject' => $this->db->get_where('agenda_details', ['user_id' => $this->session->userdata('id'), 'is_verified' => 'declined'])->num_rows(),
+            'agenda_scheduled' => $this->db->get_where('agenda_details', ['is_verified' => 'accepted'])->result_array(),
         ];
         $this->load->view('members/templates/header', $data);
         $this->load->view('members/templates/topbar');
@@ -59,7 +60,7 @@ class Member extends CI_Controller
             redirect('member/agenda');
         }
         if ($_POST) {
-            $agenda = $this->db->get('agenda_details')->result_array();
+            $agenda_accepted = $this->db->get_where('agenda_details', ['is_verified' => 'accepted'])->result_array();
             $data_post = [
                 'user_id'  => $this->input->post('user_id'),
                 'agenda_number'   => $this->input->post('AgendaNumber'),
@@ -69,9 +70,13 @@ class Member extends CI_Controller
                 'agenda_place'  => $this->input->post('AgendaPlace'),
                 'agenda_program'       => $this->input->post('AgendaProgram'),
                 'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
+                'is_verified'       => $this->input->post('is_verified'),
             ];
-            foreach ($agenda as $a) {
-                if ($data_post['agenda_date'] == $a['agenda_date']) {
+            foreach ($agenda_accepted as $a) {
+                if (strtotime($data_post['agenda_end']) < strtotime($data_post['agenda_start'])) {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Waktu selesai tidak boleh lebih awal dari waktu mulai!</div>');
+                    redirect('member/agenda');
+                } elseif ($data_post['agenda_date'] == $a['agenda_date'] && $data_post['agenda_place'] == $a['agenda_place']) {
                     if (strtotime($data_post['agenda_start']) >= strtotime($a['agenda_start'])) {
                         if (strtotime($data_post['agenda_end']) <= strtotime($a['agenda_end'])) {
                             $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda yang anda buat bentrok dengan agenda lain! Silahkan cek agenda yang sudah terjadwal</div>');
@@ -90,17 +95,7 @@ class Member extends CI_Controller
                     }
                 }
             }
-            $data = [
-                'user_id'  => $this->input->post('user_id'),
-                'agenda_number'   => $this->input->post('AgendaNumber'),
-                'agenda_date'   => $this->input->post('Date'),
-                'agenda_start' => $this->input->post('Time'),
-                'agenda_end' => $this->input->post('Time1'),
-                'agenda_place'  => $this->input->post('AgendaPlace'),
-                'agenda_program'       => $this->input->post('AgendaProgram'),
-                'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
-            ];
-            $this->db->insert('agenda_details', $data);
+            $this->db->insert('agenda_details', $data_post);
             $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah agenda baru berhasil!</div>');
         }
         redirect('member/agenda');
@@ -117,7 +112,8 @@ class Member extends CI_Controller
             redirect('member/agenda');
         }
         if ($_POST) {
-            $data = [
+            $agenda_accepted = $this->db->get_where('agenda_details', ['is_verified' => 'accepted'])->result_array();
+            $data_post = [
                 'agenda_number'   => $this->input->post('AgendaNumber'),
                 'agenda_date'   => $this->input->post('Date'),
                 'agenda_start' => $this->input->post('Time'),
@@ -126,8 +122,32 @@ class Member extends CI_Controller
                 'agenda_program'       => $this->input->post('AgendaProgram'),
                 'agenda_taskperson'       => $this->input->post('AgendaTaskperson'),
             ];
+            if (strtotime($data_post['agenda_end']) < strtotime($data_post['agenda_start'])) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Waktu selesai tidak boleh lebih awal dari waktu mulai!</div>');
+                redirect('member/agenda');
+            }
+            foreach ($agenda_accepted as $a) {
+                if ($data_post['agenda_date'] == $a['agenda_date'] && $data_post['agenda_place'] == $a['agenda_place']) {
+                    if (strtotime($data_post['agenda_start']) >= strtotime($a['agenda_start'])) {
+                        if (strtotime($data_post['agenda_end']) <= strtotime($a['agenda_end'])) {
+                            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda yang anda buat bentrok dengan agenda lain! Silahkan cek agenda yang sudah terjadwal</div>');
+                            redirect('member/agenda');
+                        } elseif (strtotime($data_post['agenda_end']) > strtotime($a['agenda_end'])) {
+                            if (strtotime($data_post['agenda_start']) < strtotime($a['agenda_end'])) {
+                                $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda yang anda buat bentrok dengan agenda lain! Silahkan cek agenda yang sudah terjadwal</div>');
+                                redirect('member/agenda');
+                            }
+                        }
+                    } elseif (strtotime($data_post['agenda_start']) < strtotime($a['agenda_start'])) {
+                        if (strtotime($data_post['agenda_end']) > strtotime($a['agenda_start'])) {
+                            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Agenda yang anda buat bentrok dengan agenda lain! Silahkan cek agenda yang sudah terjadwal</div>');
+                            redirect('member/agenda');
+                        }
+                    }
+                }
+            }
             $this->db->where('id', $this->input->post('id'));
-            $this->db->update('agenda_details', $data);
+            $this->db->update('agenda_details', $data_post);
             $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Edit agenda berhasil!</div>');
         }
         redirect('member/agenda');
@@ -167,6 +187,6 @@ class Member extends CI_Controller
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('auth/login');
+        redirect('auth');
     }
 }

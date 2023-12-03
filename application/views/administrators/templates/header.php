@@ -36,6 +36,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 responsive: false
             });
         });
+        $(document).ready(function() {
+            $('#agenda_history').DataTable({
+                responsive: false
+            });
+        });
     </script>
 </head>
 

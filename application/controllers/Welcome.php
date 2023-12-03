@@ -19,6 +19,10 @@ class Welcome extends CI_Controller
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
+	public function index()
+	{
+		redirect('auth');
+	}
 	public function not_found()
 	{
 		$this->load->view('404');

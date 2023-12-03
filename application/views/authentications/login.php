@@ -28,7 +28,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <?= $this->session->flashdata('message'); ?>
                                 </div>
                                 <div class="card-body bg-dark bg-opacity-75">
-                                    <?= form_open('auth/login'); ?>
+                                    <?= form_open('auth'); ?>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputUsername" type="text" placeholder="Username" name="username" />
                                         <label for="inputUsername">Username</label>

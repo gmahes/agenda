@@ -8,9 +8,10 @@
             <div class="modal-body">
                 <div class="container">
                     <?= form_open('member/create'); ?>
+                    <?= form_hidden('is_verified', 'not_verified'); ?>
                     <?= form_hidden('user_id', $this->session->userdata('id')); ?>
-                    <?= form_hidden('AgendaTaskperson', $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name')); ?>
-                    <?php foreach ($count as $c) : ?>
+                    <?= form_hidden('AgendaTaskperson', $this->session->userdata('first_name') . $this->session->userdata('last_name')); ?>
+                    <?php foreach ($count as $c) { ?>
                         <?= form_hidden('AgendaNumber', date('Y') . date('m') . date('d') . $c['AUTO_INCREMENT']); ?>
                         <div class="row mb-3">
                             <label for="inputAgendaNumber" class="col-sm-3 col-form-label">Nomor Agenda</label>
@@ -53,7 +54,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary float-end">Tambah</button>
-                    <?php endforeach ?>
+                    <?php } ?>
                     <?= form_close(); ?>
                 </div>
             </div>

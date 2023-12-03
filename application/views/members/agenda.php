@@ -51,7 +51,7 @@
                                             <?= form_close(); ?>
                                         </td>
                                         <td class="align-middle"><i class="fa-solid <?= $a['is_verified'] == 'not_verified' ? 'fa-hourglass-start ' : ($a['is_verified'] == 'accepted' ? 'fa-square-check ' : 'fa-ban '); ?>fa-xl mt-1" style="<?= $a['is_verified'] == 'not_verified' ? 'color: #005eff;' : ($a['is_verified'] == 'accepted' ? 'color: #026100;' : 'color: #ff0000;'); ?>" title="<?= $a['is_verified'] == 'not_verified' ? 'Dalam Proses Verifikasi' : ($a['is_verified'] == 'accepted' ? 'Disetujui' : 'Ditolak'); ?>"></i></td>
-                                        <td></td>
+                                        <td class="align-middle"><?= $a['agenda_annotation']; ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>

@@ -11,7 +11,7 @@ class Auth extends CI_Controller
         }
     }
     // method menampilkan login page
-    public function login()
+    public function index()
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
@@ -32,26 +32,29 @@ class Auth extends CI_Controller
         $username = html_escape($this->input->post('username'));
         $password = html_escape($this->input->post('password'));
         $user = $this->db->get_where('user_details', ['username' => $username])->row_array();
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                $data = [
-                    'username' => $user['username'],
-                    'role' => $user['role'],
-                    'first_name' => $user['first_name'],
-                    'last_name' => $user['last_name'],
-                    'id' => $user['id']
-                ];
-                $this->session->set_userdata($data);
-                redirect($user['role'] == 1 ? 'administrator' : 'member');
+        if ($_POST) {
+            if ($user) {
+                if (password_verify($password, $user['password'])) {
+                    $data = [
+                        'username' => $user['username'],
+                        'role' => $user['role'],
+                        'first_name' => $user['first_name'],
+                        'last_name' => $user['last_name'],
+                        'id' => $user['id']
+                    ];
+                    $this->session->set_userdata($data);
+                    redirect($user['role'] == 1 ? 'administrator' : 'member');
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+                        Username / Password anda salah!</div>');
+                    redirect('auth');
+                }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
                     Username / Password anda salah!</div>');
-                redirect('auth/login');
+                redirect('auth');
             }
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
-                Username / Password anda salah!</div>');
-            redirect('auth/login');
         }
+        redirect('auth');
     }
 }

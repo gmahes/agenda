@@ -9,7 +9,7 @@ class Administrator extends CI_Controller
         if (!$this->session->has_userdata('username')) {
             $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
                 Anda belum login!</div>');
-            redirect('auth/login');
+            redirect('auth');
         } elseif ($this->session->has_userdata('username') && $this->session->userdata('role') == '0') {
             redirect('welcome/not_authorized');
             die;
@@ -33,7 +33,7 @@ class Administrator extends CI_Controller
     }
     public function employees()
     {
-        $all_user = $this->db->get('user_details')->result_array();
+        $all_user = $this->db->get_where('user_details', ['id !=' => 1])->result_array();
         $data = [
             'title' => 'Dashboard',
             'user' => $all_user
@@ -81,10 +81,9 @@ class Administrator extends CI_Controller
             $data = [
                 'id'         => $this->input->post('id'),
                 'username'   => $this->input->post('username'),
-                'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'first_name' => $this->input->post('first_name') . ' ',
                 'last_name'  => $this->input->post('last_name'),
-                'role'       => $this->input->post('role')
+                'role'       => $this->input->post('role'),
             ];
             $data_agenda = [
                 'agenda_taskperson' => $this->input->post('first_name') . $this->input->post('last_name')
@@ -118,20 +117,41 @@ class Administrator extends CI_Controller
         $this->load->view('administrators/agenda', $data);
         $this->load->view('administrators/templates/footer');
     }
+    public function history()
+    {
+        $all_agenda = $this->db->get('agenda_details')->result_array();
+        $data = [
+            'title' => 'Dashboard',
+            'agenda' => $all_agenda,
+        ];
+        $this->load->view('administrators/templates/header', $data);
+        $this->load->view('administrators/templates/topbar');
+        $this->load->view('administrators/templates/sidebar');
+        $this->load->view('administrators/agenda_history', $data);
+        $this->load->view('administrators/templates/footer');
+    }
     public function approve()
     {
         if ($_POST) {
             $id = $this->input->post('id');
-            $this->db->where('id', $id)->update('agenda_details', ['is_verified' => 'accepted']);
+            $this->db->where('id', $id)->update('agenda_details', ['is_verified' => 'accepted', 'agenda_validator' => $this->session->userdata('first_name') . ' ' . $this->session->userdata('last_name')]);
             $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Agenda berhasil diverifikasi!</div>');
         }
         redirect('administrator/agenda');
     }
     public function reject()
     {
+        $this->form_validation->set_rules('annotation', 'Annotation', 'required');
+        if ($this->form_validation->run() == false && $_POST) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger mt-2" role="alert">Keterangan harus diisi!</div>');
+            redirect('administrator/agenda');
+        }
         if ($_POST) {
-            $id = $this->input->post('id');
-            $this->db->where('id', $id)->update('agenda_details', ['is_verified' => 'declined']);
+            $data = [
+                'id' => $this->input->post('id'),
+                'annotation' => $this->input->post('annotation')
+            ];
+            $this->db->where('id', $data['id'])->update('agenda_details', ['is_verified' => 'declined', 'agenda_validator' => $this->session->userdata('first_name') . $this->session->userdata('last_name'), 'agenda_annotation' => $data['annotation']]);
             $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Agenda berhasil ditolak!</div>');
         }
         redirect('administrator/agenda');
@@ -171,6 +191,6 @@ class Administrator extends CI_Controller
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('auth/login');
+        redirect('auth');
     }
 }

@@ -2,8 +2,7 @@
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Core</div>
+                <div class="nav mt-3">
                     <a class="nav-link" href="<?= base_url('member'); ?>">
                         <div class="sb-nav-link-icon"><i class="fas fa-chess-board"></i></div>
                         Dashboard
@@ -17,14 +16,13 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="<?= base_url('member/agenda'); ?>">Buat Agenda</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                         </nav>
                     </div>
                 </div>
             </div>
             <div class="sb-sidenav-footer">
-                <div class="small">Logged in as:</div>
-                Start Bootstrap
+                <div class="small">Copyright :</div>
+                &copy; Kelompok 3 (<?= date('Y'); ?>)
             </div>
         </nav>
     </div>

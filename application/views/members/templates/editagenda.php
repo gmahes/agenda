@@ -33,7 +33,7 @@
                         <div class="row mb-3">
                             <label for="inputTime" class="col-sm-3 col-form-label">Waktu</label>
                             <div class="col-sm-3">
-                                <input type="time" class="form-control" id="inputTime" name="Time" value="<?= $ag['agenda_start']; ?>">
+                                <input type="time" class="form-control" id="inputTime" name="Time" value="<?= date('H:i', strtotime($ag['agenda_start'])); ?>">
                             </div>
                             <label for="inputTimee" class="col-sm-3 col-form-label text-center">s/d</label>
                             <div class="col-sm-3">

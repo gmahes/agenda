@@ -2,7 +2,7 @@
     <main>
         <div class="container-fluid px-4">
             <!-- start content -->
-            <h1 class="mt-2">Selamat datang, <?= $this->session->userdata('last_name'); ?></h1>
+            <h1 class="mt-2">Selamat datang, <?= $this->session->userdata('first_name') . $this->session->userdata('last_name'); ?></h1>
             <hr>
             <?= $this->session->flashdata('message'); ?>
             <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -56,7 +56,7 @@
                                     <th scope="col" class="text-center align-middle">Waktu</th>
                                     <th scope="col" class="text-center align-middle">Tempat</th>
                                     <th scope="col" class="text-center align-middle">Pembuat Agenda</th>
-
+                                    <th scope="col" class="text-center align-middle">Validator Agenda</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
@@ -70,6 +70,7 @@
                                         </td>
                                         <td class="align-middle"><?= $a['agenda_place']; ?></td>
                                         <td class="align-middle"><?= $a['agenda_taskperson']; ?></td>
+                                        <td class="align-middle"><?= $a['agenda_validator']; ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>
