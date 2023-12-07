@@ -67,8 +67,8 @@ if (!function_exists('editagenda_validation')) {
     }
 }
 
-if (!function_exists('changepassword_member')) {
-    function changepassword_member()
+if (!function_exists('changepassword_validation')) {
+    function changepassword_validation()
     {
         $ci = &get_instance();
         $ci->form_validation->set_rules('OldPassword', 'Old Password', 'required|trim');
