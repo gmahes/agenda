@@ -1,12 +1,12 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-if (!function_exists('data_index')) {
-    function data_index()
+if (!function_exists('dataindex_admin')) {
+    function dataindex_admin()
     {
         $ci = &get_instance();
         $data = [
-            'title' => 'Dashboard',
+            'title' => 'SIMARS | Dashboard',
             'user' => $ci->db->get('user_details'),
             'agenda' => $ci->db->get_where('agenda_details', ['is_verified' => 'accepted'])->result_array(),
             'agenda_count' => $ci->db->get_where('agenda_details', ['is_verified' => 'not_verified'])->num_rows(),
@@ -22,14 +22,14 @@ if (!function_exists('data_employees')) {
         $ci = &get_instance();
         $all_user = $ci->db->get_where('user_details', ['id !=' => 1])->result_array();
         $data = [
-            'title' => 'Dashboard',
+            'title' => 'SIMARS | Employees',
             'user' => $all_user
         ];
         return $data;
     }
 }
-if (!function_exists('create_validation')) {
-    function create_validation()
+if (!function_exists('createuser_validation')) {
+    function createuser_validation()
     {
         $ci = &get_instance();
         $ci->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[user_details.username]|alpha_numeric');
@@ -43,8 +43,8 @@ if (!function_exists('create_validation')) {
         }
     }
 }
-if (!function_exists('edit_validation')) {
-    function edit_validation()
+if (!function_exists('edituser_validation')) {
+    function edituser_validation()
     {
         $ci = &get_instance();
         $ci->form_validation->set_rules('first_name', 'First Name', 'trim|required');
@@ -62,7 +62,7 @@ if (!function_exists('data_agenda')) {
         $ci = &get_instance();
         $all_agenda = $ci->db->get_where('agenda_details', ['is_verified' => 'not_verified'])->result_array();
         $data = [
-            'title' => 'Dashboard',
+            'title' => 'SIMARS | Agenda',
             'agenda' => $all_agenda,
             'taskperson' => $ci->db->select('first_name, last_name')->from('user_details')->join('agenda_details', 'user_details.id = agenda_details.agenda_taskperson')->get()->result_array()
         ];
@@ -75,7 +75,7 @@ if (!function_exists('history_agenda')) {
         $ci = &get_instance();
         $all_agenda = $ci->db->get('agenda_details')->result_array();
         $data = [
-            'title' => 'Dashboard',
+            'title' => 'SIMARS | History Agenda',
             'agenda' => $all_agenda,
         ];
         return $data;

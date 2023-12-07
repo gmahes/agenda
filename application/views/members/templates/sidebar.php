@@ -15,7 +15,7 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="<?= base_url('member/agenda'); ?>">Buat Agenda</a>
+                            <a class="nav-link" href="<?= base_url('member/agenda'); ?>">Pengajuan Agenda</a>
                         </nav>
                     </div>
                 </div>

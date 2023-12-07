@@ -17,7 +17,7 @@ class Administrator extends CI_Controller
     }
     public function index()
     {
-        $data = data_index();
+        $data = dataindex_admin();
         $this->load->view('administrators/templates/header', $data);
         $this->load->view('administrators/templates/topbar');
         $this->load->view('administrators/templates/sidebar');
@@ -35,7 +35,7 @@ class Administrator extends CI_Controller
     }
     public function create()
     {
-        create_validation();
+        createuser_validation();
         if ($_POST) {
             $this->Administrator_model->create_user();
             $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Tambah karyawan baru berhasil!</div>');
@@ -44,7 +44,7 @@ class Administrator extends CI_Controller
     }
     public function edit()
     {
-        edit_validation();
+        edituser_validation();
         if ($_POST) {
             $this->Administrator_model->edit_user();
             $this->session->set_flashdata('message', '<div class="alert alert-success mt-2" role="alert">Edit karyawan berhasil!</div>');
