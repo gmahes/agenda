@@ -26,7 +26,7 @@ if (!function_exists('datamember_agenda')) {
             'agenda' => $ci->db->get_where('agenda_details', ['user_id' => $ci->session->userdata('id')])->result_array(),
             'count' => $ci->db->query('SELECT AUTO_INCREMENT
             FROM information_schema.TABLES
-            WHERE TABLE_SCHEMA = "freedb_agenda_db"
+            WHERE TABLE_SCHEMA = "simars_db"
             AND TABLE_NAME = "agenda_details"')->result_array(),
         ];
         return $data;

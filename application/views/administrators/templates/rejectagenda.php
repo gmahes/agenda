@@ -24,7 +24,7 @@
                                 <label for="floatingTextarea2">&nbsp;&nbsp;Isi Keterangan Penolakan Agenda</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-danger float-end">Tolak</button>
+                        <button type="submit" class="btn btn-danger float-end" onclick="return confirm('Apakah anda yakin akan menolak agenda ini?')">Tolak</button>
                         <?= form_close(); ?>
                     </div>
                 </div>

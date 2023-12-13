@@ -49,7 +49,7 @@
                                                     <li>
                                                         <?= form_open('administrator/approve'); ?>
                                                         <?= form_hidden('id', $a['id']); ?>
-                                                        <button type="submit" class="dropdown-item text-success text-center" onclick="return confirm('Anda anda yakin akan menyetujui agenda ini?')">Setuju</button>
+                                                        <button type="submit" class="dropdown-item text-success text-center" onclick="return confirm('Apakah anda yakin akan menyetujui agenda ini?')">Setuju</button>
                                                         <?= form_close(); ?>
                                                     </li>
                                                     <hr class="dropdown-divider">
